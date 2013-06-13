@@ -1,14 +1,9 @@
 #include "console.h"
 namespace cui{
-<<<<<<< HEAD
   bool Console::_insertMode = true;
   unsigned int Console::_tabsize = 4;
 
   void Console::strdsp(const char* str, int row, int col, int len, int curpos){
-=======
-
-  void Console::dspstr(const char* str, int row, int col, int len){
->>>>>>> 45024a30197c3ec8714c7865d8433e99a18d7383
     int i = 0;
     setPos(row, col);
     if(len){
@@ -24,7 +19,6 @@ namespace cui{
         putChar(str[i]);
       }
     }
-<<<<<<< HEAD
     if(curpos >= 0){
       setPos(row, col + curpos);
     }
@@ -87,14 +81,6 @@ namespace cui{
     }
     return key;
   }
-=======
-  }
-
-
-
-
-
->>>>>>> 45024a30197c3ec8714c7865d8433e99a18d7383
 
 
 
