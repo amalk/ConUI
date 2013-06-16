@@ -33,7 +33,7 @@ namespace cui{
             int localCurPos = 0;
             int key = 0;
             int i = 0;
-            unsigned int strLength = bio::strlen(str);
+            int strLength = bio::strlen(str);
 
             // *curPosition = 100;
             //*strOffset = 100;
@@ -78,7 +78,7 @@ namespace cui{
                     if(*curPosition != fieldLength - 1){
                         (*curPosition)++;
                     }
-                    else if(*strOffset + fieldLength < (signed int)strLength + 1){
+                    else if(*strOffset + fieldLength < strLength + 1){
                         (*strOffset)++;
                     }
                     //(strLength == maxStrLength) && *strOffset && (*strOffset)--;
@@ -127,16 +127,36 @@ namespace cui{
                     done = true;
                     break;
                 default:
-                    if(key>= ' ' && key <='~'){
+                    if(key >= ' ' && key <= '~'){
                         if(Console::_insertMode){
+                            if(strLength < maxStrLength){
+                                for(i = strLength; i != *curPosition + *strOffset; i--){
+                                    str[i] = str[i - 1];
+                                }
+                                strLength++;
+                                str[*strOffset+*curPosition] = key;
+                                if(*curPosition != fieldLength - 1){
+                                    (*curPosition)++;
+                                }
+                                else if(*curPosition == fieldLength - 1 && str[*strOffset + *curPosition] != '\0'){
+                                    (*strOffset)++;
+                                }
+                            }
                         }
                         else{
                             str[*strOffset+*curPosition] = key;
-                            (*curPosition)++;
+                            if(*curPosition != fieldLength - 1){
+                              (*curPosition)++;
+                            }
+                            else if(*curPosition == fieldLength - 1 && strLength < maxStrLength){
+                                  (*strOffset)++;
+                                  strLength++;
+                            } 
                         }
                     }
+                    str[strLength] = '\0';
                     break;
-                }
+                  }
             }
             
             (key == ESCAPE) && bio::strcpy(str, strOriginal);
