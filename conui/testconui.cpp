@@ -9,8 +9,8 @@ void prnbox(int row, int col, bool clear = false){
 }
 
 int main(){
-  char str[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPabcdefghijklmnopqrstuvwxyz0123456789AB";
-  //str[] = 0;
+  char str[81] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPabcdefghijklmnopqrstuvwxyz0123456789AB";
+  //str[20] = 0;
   bool done = false;
   int row = 0;
   int col = 0;

@@ -21,7 +21,7 @@
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testconui.cpp">
+    <ClCompile Include="cui_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
