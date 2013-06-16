@@ -23,13 +23,13 @@
 
 /* Comment any of the following to do partial testing */
 
-#define DO_ALL  /*  comment this to be able to do partial testing,
+/*#define DO_ALL  /*  comment this to be able to do partial testing,
                      if this is not commented, all tests will happen
                      no matter what you comment below*/
 /*#define DO_01
 #define DO_02
 #define DO_03
-#define DO_04       comment this to jump over all 09 tests
+#define DO_04//       comment this to jump over all 09 tests
 #define DO_0401
 #define DO_0402
 #define DO_0403
@@ -53,9 +53,9 @@
 #define DO_0421
 #define DO_0422
 #define DO_0423
-#define DO_0424
+#define DO_0424*/
 #define DO_5
-*/
+//*/
 
 #define _CRT_SECURE_NO_WARNINGS 1
 

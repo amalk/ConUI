@@ -29,11 +29,21 @@ namespace cui{
         int* strOffset, int* curPosition,
         bool InTextEditor, bool ReadOnly, bool& insertMode ){
             bool done = false;
+            bool terminate = false;
             int localOffset = 0;
             int localCurPos = 0;
             int key = 0;
             int i = 0;
             int strLength = bio::strlen(str);
+            
+            // start - record initial values
+
+            int offsetOriginal = *strOffset;
+            int curPosOriginal = *curPosition;
+            char* strOriginal = new char [strLength + 1];
+            bio::strcpy(strOriginal, str);
+
+            // end - record initial values
 
             //*curPosition = 100;
             //*strOffset = 100;
@@ -49,7 +59,7 @@ namespace cui{
             if(curPosition == (int*)0){
                 curPosition = &localCurPos;
             }
-            else if(*curPosition > fieldLength || *curPosition > strLength){
+            else if(*curPosition > fieldLength || *curPosition > strLength - *strOffset){
                 *curPosition = strLength - *strOffset;
                 if(*curPosition >= fieldLength)
                     *curPosition = fieldLength - 1;
@@ -58,10 +68,12 @@ namespace cui{
             // end - initial corrections
 
 
-            char* strOriginal = new char [strLength + 1];
-            bio::strcpy(strOriginal, str);
-
             while(!done){
+                if(InTextEditor && *strOffset != offsetOriginal){
+                    done = true;
+                    terminate = true;
+                }
+
                 strdsp(str+*strOffset, row, col, fieldLength, *curPosition);
                 key = console.getKey();
                 strLength = bio::strlen(str);
@@ -91,11 +103,14 @@ namespace cui{
                         *strOffset = strLength - fieldLength + 1;
                     }
                     *curPosition = strLength - *strOffset;
-                    (strLength == maxStrLength) && (*strOffset)--;
+                    //(strLength == maxStrLength) && (*strOffset)--;
                     break;
                 case ESCAPE:
-                    bio::strcpy(str, strOriginal);
-                    delete[] strOriginal;
+                    if(!InTextEditor){
+                        bio::strcpy(str, strOriginal);
+                        *strOffset = offsetOriginal;
+                        *curPosition = curPosOriginal;
+                    }
                     done = true;
                     break; 
                 case BACKSPACE:
@@ -164,19 +179,26 @@ namespace cui{
                         else{
                             str[*strOffset+*curPosition] = key;
                             if(*curPosition != fieldLength - 1){
-                              (*curPosition)++;
+                                (*curPosition)++;
                             }
                             else if(*curPosition == fieldLength - 1 && strLength < maxStrLength){
-                                  (*strOffset)++;
-                                  strLength++;
+                                (*strOffset)++;
+                                strLength++;
                             } 
                         }
                     }
                     str[strLength] = '\0';
                     break;
-                  }
+                }
             }
 
+            if(ReadOnly)
+                bio::strcpy(str, strOriginal);
+            
+            delete[] strOriginal;
+
+            if(terminate)
+                return 0;
             return key;
     }
 
