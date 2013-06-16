@@ -9,8 +9,8 @@ void prnbox(int row, int col, bool clear = false){
 }
 
 int main(){
-  char str[81] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP";
-  str[26] = 0;
+  char str[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPabcdefghijklmnopqrstuvwxyz0123456789AB";
+  //str[] = 0;
   bool done = false;
   int row = 0;
   int col = 0;
@@ -18,7 +18,7 @@ int main(){
   int offset = 7;
   int curpos = 8;
   prnbox(10, 20);
-  key = console.stredit(str,11, 21, 15, 80, &offset, &curpos);
+  key = console.stredit(str, 11, 21, 15, 80, &offset, &curpos);
   console.strdsp(str, 15, 21);
   console.pause();
   return 0;

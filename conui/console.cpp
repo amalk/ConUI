@@ -36,7 +36,7 @@ namespace cui{
             int strLength = bio::strlen(str);
 
             // *curPosition = 100;
-            //*strOffset = 100;
+            // *strOffset = 100;
             // start - initial corrections
 
             if(strOffset == (int*)0){
@@ -62,8 +62,8 @@ namespace cui{
 
             while(!done){
                 strdsp(str+*strOffset, row, col, fieldLength, *curPosition);
-
                 key = console.getKey();
+                strLength = bio::strlen(str);
 
                 switch(key){
                 case LEFT:
@@ -75,13 +75,13 @@ namespace cui{
                     }
                     break;
                 case RIGHT:
-                    if(*curPosition != fieldLength - 1){
+                    if((*curPosition != fieldLength - 1) && (str[*curPosition + *strOffset])){
                         (*curPosition)++;
                     }
                     else if(*strOffset + fieldLength < strLength + 1){
                         (*strOffset)++;
                     }
-                    //(strLength == maxStrLength) && *strOffset && (*strOffset)--;
+                    //(strLength == maxStrLength) && *strOffset && (*strOffset)--;*/
                     break;
                 case HOME:
                     *strOffset = *curPosition = 0;
@@ -98,10 +98,22 @@ namespace cui{
                     break; 
 
                 case BACKSPACE:
-                    for(i=-1; str[*strOffset+*curPosition + i] ; i++){
-                        str[*strOffset+*curPosition + i] = str[*strOffset+*curPosition + 1 + i];
+                    if(*curPosition > 1 || (*curPosition == 1 && *strOffset == 0)){
+                        for(i=-1; str[*strOffset+*curPosition + i] ; i++){
+                            str[*strOffset+*curPosition + i] = str[*strOffset+*curPosition + 1 + i];
+                        }
+                        (*curPosition)--;
                     }
-                    (*curPosition)--;
+                    else if(*curPosition == 0 || *curPosition == 1){
+                        if(*strOffset >= _tabsize) {
+                            (*strOffset) -= _tabsize;
+                            (*curPosition) += _tabsize;
+                        }
+                        else{
+                            (*curPosition) += *strOffset;
+                            (*strOffset) = 0;
+                        }
+                    }
                     break;
                 case DEL:
                     for(i=0; str[*strOffset+*curPosition + i] ; i++){
@@ -164,6 +176,22 @@ namespace cui{
             delete [] strOriginal;
 
             return key;
+    }
+
+    Console& operator>>(Console& cn, int& ch){
+        ch = cn.getKey();
+        return cn;
+    }
+
+    Console& operator<<(Console& cn, char ch){
+        cn.putChar(ch);
+        return cn;
+    }
+
+    Console& operator<<(Console& cn, const char* str){
+        for(int i = 0; str[i]; i++)
+            cn.putChar(str[i]);
+        return cn;
     }
 
     Console console;
