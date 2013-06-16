@@ -35,24 +35,25 @@ namespace cui{
             int i = 0;
             int strLength = bio::strlen(str);
 
-            // *curPosition = 100;
-            // *strOffset = 100;
+            //*curPosition = 100;
+            //*strOffset = 100;
             // start - initial corrections
 
             if(strOffset == (int*)0){
                 strOffset = &localOffset;
             }
             else if(*strOffset > strLength){
-                //*strOffset = strLength;
+                *strOffset = strLength;
             }
 
             if(curPosition == (int*)0){
                 curPosition = &localCurPos;
             }
-            /*else if(*curPosition > fieldLength) {
-                *strOffset = strLength - fieldLength;
-                *curPosition = fieldLength - 1;
-            }*/
+            else if(*curPosition > fieldLength || *curPosition > strLength){
+                *curPosition = strLength - *strOffset;
+                if(*curPosition >= fieldLength)
+                    *curPosition = fieldLength - 1;
+            }
 
             // end - initial corrections
 
@@ -81,31 +82,31 @@ namespace cui{
                     else if(*strOffset + fieldLength < strLength + 1){
                         (*strOffset)++;
                     }
-                    //(strLength == maxStrLength) && *strOffset && (*strOffset)--;*/
                     break;
                 case HOME:
                     *strOffset = *curPosition = 0;
                     break;
                 case END:
-                    if(strLength > fieldLength){
+                    if(*strOffset + fieldLength < strLength){
                         *strOffset = strLength - fieldLength + 1;
-                    }    
+                    }
                     *curPosition = strLength - *strOffset;
                     (strLength == maxStrLength) && (*strOffset)--;
                     break;
                 case ESCAPE:
+                    bio::strcpy(str, strOriginal);
+                    delete[] strOriginal;
                     done = true;
                     break; 
-
                 case BACKSPACE:
-                    if(*curPosition > 1 || (*curPosition == 1 && *strOffset == 0)){
+                    if(*curPosition >= 1 || (*curPosition == 1 && *strOffset == 0)){
                         for(i=-1; str[*strOffset+*curPosition + i] ; i++){
                             str[*strOffset+*curPosition + i] = str[*strOffset+*curPosition + 1 + i];
                         }
                         (*curPosition)--;
                     }
-                    else if(*curPosition == 0 || *curPosition == 1){
-                        if(*strOffset >= _tabsize) {
+                    if(*curPosition == 0 || *curPosition == 1){
+                        if(*strOffset >= (signed int)_tabsize) {
                             (*strOffset) -= _tabsize;
                             (*curPosition) += _tabsize;
                         }
@@ -122,8 +123,13 @@ namespace cui{
                     break;
                 case INSERT:
                     Console::_insertMode = !Console::_insertMode;
+                    insertMode = !insertMode;
                     break;
                 case ENTER:
+                case UP:
+                case DOWN:
+                case PGUP:
+                case PGDN:
                 case F(1):
                 case F(2):
                 case F(3):
@@ -140,7 +146,7 @@ namespace cui{
                     break;
                 default:
                     if(key >= ' ' && key <= '~'){
-                        if(Console::_insertMode){
+                        if(insertMode){
                             if(strLength < maxStrLength){
                                 for(i = strLength; i != *curPosition + *strOffset; i--){
                                     str[i] = str[i - 1];
@@ -170,10 +176,6 @@ namespace cui{
                     break;
                   }
             }
-            
-            (key == ESCAPE) && bio::strcpy(str, strOriginal);
-
-            delete [] strOriginal;
 
             return key;
     }
