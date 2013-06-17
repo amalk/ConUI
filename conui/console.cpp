@@ -28,21 +28,22 @@ namespace cui{
     int Console::stredit(char *str, int row, int col, int fieldLength, int maxStrLength,
         int* strOffset, int* curPosition,
         bool InTextEditor, bool ReadOnly, bool& insertMode ){
-            bool done = false;
-            bool terminate = false;
+
+            int offsetOriginal = *strOffset;
+            int curPosOriginal = *curPosition;
+
             int localOffset = 0;
             int localCurPos = 0;
             int key = 0;
             int i = 0;
             int strLength = bio::strlen(str);
+
+			bool done = false;
+            bool terminate = false;
             
             // start - record initial values
-
-            int offsetOriginal = *strOffset;
-            int curPosOriginal = *curPosition;
             char* strOriginal = new char [strLength + 1];
             bio::strcpy(strOriginal, str);
-
             // end - record initial values
 
             // start - initial corrections
@@ -73,7 +74,7 @@ namespace cui{
                 }
 
                 strdsp(str+*strOffset, row, col, fieldLength, *curPosition);
-                key = console.getKey();
+				key = console.getKey();
                 strLength = bio::strlen(str);
 
                 switch(key){
@@ -118,7 +119,7 @@ namespace cui{
                         (*curPosition)--;
                     }
                     if(*curPosition == 0 || *curPosition == 1){
-                        if(*strOffset >= (signed int)_tabsize) {
+                        if(*strOffset >= _tabsize) {
                             (*strOffset) -= _tabsize;
                             (*curPosition) += _tabsize;
                         }
@@ -133,8 +134,8 @@ namespace cui{
                         str[*strOffset+*curPosition + i] = str[*strOffset+*curPosition + 1 + i];
                     }
                     break;
-                case INSERT:
-                    insertMode = !insertMode;
+				case INSERT:
+					insertMode = !insertMode;
                     break;
                 case ENTER:
                 case UP:
@@ -155,15 +156,104 @@ namespace cui{
                 case F(12):
                     done = true;
                     break;
+				case TAB:
+					if(InTextEditor){
+						if(insertMode){
+							if(strLength + _tabsize <= maxStrLength){
+                                
+								for(i = strLength + _tabsize; i >= *curPosition + *strOffset; i--){
+									str[i] = str[i - _tabsize];
+                                }
+
+								for(i = 0; i < _tabsize; i++){
+                                    str[i + *curPosition + *strOffset] = ' ';
+                                }
+
+								strLength += _tabsize;
+
+								if(*curPosition + _tabsize < fieldLength){	
+									*curPosition += _tabsize;
+								}
+								else{
+									*strOffset += *curPosition + _tabsize - fieldLength + 1;
+									*curPosition = fieldLength - 1;
+								}
+
+                            }
+							else{
+
+								for(i = maxStrLength; i >= *curPosition + *strOffset; i--){
+									str[i] = str[i - (maxStrLength - strLength)];
+                                }
+
+								for(i = 0; i < maxStrLength - strLength; i++){
+                                    str[i + *curPosition + *strOffset] = ' ';
+                                }
+
+								if(*curPosition + maxStrLength - strLength < fieldLength){	
+									*curPosition += maxStrLength - strLength;
+								}
+								else{
+									*strOffset += *curPosition + maxStrLength - strLength - fieldLength + 1;
+									*curPosition = fieldLength - 1;
+								}
+
+							}
+                        }
+                        else{
+
+							if(strLength + _tabsize <= maxStrLength){
+
+								if(*strOffset + *curPosition + _tabsize > strLength){
+									str[_tabsize + *curPosition + *strOffset] = 0;
+								}
+
+								for(i = 0; i < _tabsize; i++){
+									str[i + *curPosition + *strOffset] = ' ';
+								}
+
+								if(*curPosition + _tabsize < fieldLength){	
+									*curPosition += _tabsize;
+								}
+								else{
+									*strOffset += *curPosition + _tabsize - fieldLength + 1;
+									*curPosition = fieldLength - 1;
+								}
+
+							}
+							else{
+
+								for(i = 0; i < maxStrLength - strLength; i++){
+									str[i + *curPosition + *strOffset] = ' ';
+								}
+
+								if(*curPosition + maxStrLength - strLength < fieldLength){	
+									*curPosition += maxStrLength - strLength;
+								}
+								else{
+									*strOffset += *curPosition + maxStrLength - strLength - fieldLength + 1;
+									*curPosition = fieldLength - 1;
+								}
+
+								str[maxStrLength] = 0;
+
+							}
+
+						}
+					}
+					else {
+						done = true;
+					}
+					break;
                 default:
                     if(key >= ' ' && key <= '~'){
-                        if(insertMode){
+						if(insertMode){
                             if(strLength < maxStrLength){
-                                for(i = strLength; i != *curPosition + *strOffset; i--){
+	                            for(i = strLength; i != *curPosition + *strOffset; i--){
                                     str[i] = str[i - 1];
                                 }
-                                strLength++;
-                                str[*strOffset+*curPosition] = key;
+								strLength++;
+                                str[*strOffset + *curPosition] = key;
                                 if(*curPosition != fieldLength - 1){
                                     (*curPosition)++;
                                 }
@@ -172,16 +262,14 @@ namespace cui{
                                 }
                             }
                         }
-                        else if(strLength < maxStrLength || *curPosition + *strOffset < strLength){
+						else if(strLength < maxStrLength || *curPosition + *strOffset < strLength){
 							strLength < maxStrLength && strLength++;
 							str[*strOffset+*curPosition] = key;
-							if(*curPosition != fieldLength - 1)
-                                (*curPosition)++;
-                            else if(*curPosition + *strOffset < strLength)
-                                (*strOffset)++;
+							if(*curPosition != fieldLength - 1) (*curPosition)++;
+                            else if(*curPosition + *strOffset < strLength) (*strOffset)++;
 						}
-                        str[strLength] = '\0';
                     }
+					str[strLength] = 0;
                     break;
                 }
             }
