@@ -45,8 +45,6 @@ namespace cui{
 
             // end - record initial values
 
-            //*curPosition = 100;
-            //*strOffset = 100;
             // start - initial corrections
 
             if(strOffset == (int*)0){
@@ -103,7 +101,6 @@ namespace cui{
                         *strOffset = strLength - fieldLength + 1;
                     }
                     *curPosition = strLength - *strOffset;
-                    //(strLength == maxStrLength) && (*strOffset)--;
                     break;
                 case ESCAPE:
                     if(!InTextEditor){
@@ -137,7 +134,6 @@ namespace cui{
                     }
                     break;
                 case INSERT:
-                    Console::_insertMode = !Console::_insertMode;
                     insertMode = !insertMode;
                     break;
                 case ENTER:
@@ -171,23 +167,21 @@ namespace cui{
                                 if(*curPosition != fieldLength - 1){
                                     (*curPosition)++;
                                 }
-                                else if(*curPosition == fieldLength - 1 && str[*strOffset + *curPosition] != '\0'){
+                                else if(*curPosition + *strOffset < strLength){
                                     (*strOffset)++;
                                 }
                             }
                         }
-                        else{
-                            str[*strOffset+*curPosition] = key;
-                            if(*curPosition != fieldLength - 1){
+                        else if(strLength < maxStrLength || *curPosition + *strOffset < strLength){
+							strLength < maxStrLength && strLength++;
+							str[*strOffset+*curPosition] = key;
+							if(*curPosition != fieldLength - 1)
                                 (*curPosition)++;
-                            }
-                            else if(*curPosition == fieldLength - 1 && strLength < maxStrLength){
+                            else if(*curPosition + *strOffset < strLength)
                                 (*strOffset)++;
-                                strLength++;
-                            } 
-                        }
+						}
+                        str[strLength] = '\0';
                     }
-                    str[strLength] = '\0';
                     break;
                 }
             }
