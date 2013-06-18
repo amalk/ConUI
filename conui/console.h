@@ -23,21 +23,10 @@ namespace cui{
 
     Console& operator<<(Console& cn, const char* str);
 
+	void tabFunction(char* str, int& strLength, int maxStrLength, int& position, int& offset, unsigned int tabsize, const int fieldLength, const bool isInsert);
+
     extern Console console;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif
