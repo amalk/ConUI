@@ -5,7 +5,7 @@ namespace cui
     bool Console::_insertMode = true;
     unsigned int Console::_tabsize = 4;
 
-    void Console::strdsp (const char *str, int row, int col, int len, int curpos)
+    void Console::strdsp (const char* str, int row, int col, int len, int curpos)
     {
         int i = 0;
         setPos (row, col);
@@ -23,14 +23,14 @@ namespace cui
                 putChar (str[i]);
             }
         }
-        if (curpos >= 0) {
+        if(curpos >= 0){
             setPos (row, col + curpos);
         }
     }
 
-    int Console::stredit (char *str, int row, int col, int fieldLength,
-                          int maxStrLength, int *strOffset, int *curPosition,
-                          bool InTextEditor, bool ReadOnly, bool & insertMode)
+    int Console::stredit (char* str, int row, int col, int fieldLength,
+                          int maxStrLength, int* strOffset, int* curPosition,
+                          bool InTextEditor, bool ReadOnly, bool& insertMode)
     {
 
         int offsetOriginal = *strOffset;
@@ -161,84 +161,13 @@ namespace cui
             case TAB:
                 if (InTextEditor) {
                     if (insertMode) {
-                        if (strLength + _tabsize <= maxStrLength) {
+                        
+                        tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, true);
 
-                            for (i = strLength + _tabsize; i >= *curPosition + *strOffset; i--) {
-                                str[i] = str[i - _tabsize];
-                            }
-
-                            for (i = 0; i < _tabsize; i++) {
-                                str[i + *curPosition + *strOffset] = ' ';
-                            }
-
-                            strLength += _tabsize;
-
-                            if (*curPosition + _tabsize < fieldLength) {
-                                *curPosition += _tabsize;
-                            }
-                            else {
-                                *strOffset += *curPosition + _tabsize - fieldLength + 1;
-                                *curPosition = fieldLength - 1;
-                            }
-
-                        }
-                        else {
-
-                            for (i = maxStrLength; i >= *curPosition + *strOffset; i--) {
-                                str[i] = str[i - (maxStrLength - strLength)];
-                            }
-
-                            for (i = 0; i < maxStrLength - strLength; i++) {
-                                str[i + *curPosition + *strOffset] = ' ';
-                            }
-
-                            if (*curPosition + maxStrLength - strLength < fieldLength) {
-                                *curPosition += maxStrLength - strLength;
-                            }
-                            else {
-                                *strOffset += *curPosition + maxStrLength - strLength - fieldLength + 1;
-                                *curPosition = fieldLength - 1;
-                            }
-
-                        }
                     }
                     else {
 
-                        if (*strOffset + *curPosition + _tabsize <= maxStrLength) {
-
-                            if (*strOffset + *curPosition + _tabsize > strLength) {
-                                str[_tabsize + *curPosition + *strOffset] = 0;
-                            }
-
-                            for (i = 0; i < _tabsize; i++) {
-                                str[i + *curPosition + *strOffset] = ' ';
-                            }
-
-                            if (*curPosition + _tabsize < fieldLength) {
-                                *curPosition += _tabsize;
-                            }
-                            else {
-                                *strOffset += *curPosition + _tabsize - fieldLength + 1;
-                                *curPosition = fieldLength - 1;
-                            }
-
-                        }
-                        else {
-
-                            for (i = 0; i < maxStrLength - strLength; i++) {
-                                str[i + *curPosition + *strOffset] = ' ';
-                            }
-
-                            if (*curPosition + maxStrLength - strLength < fieldLength) {
-                                *curPosition += maxStrLength - strLength;
-                            }
-                            else {
-                                *strOffset += *curPosition + maxStrLength - strLength - fieldLength + 1;
-                                *curPosition = fieldLength - 1;
-                            }
-
-                            str[maxStrLength] = 0;
-                        }
+                        tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, false);
 
                     }
                 }
@@ -301,6 +230,65 @@ namespace cui
         for (int i = 0; str[i]; i++)
             cn.putChar (str[i]);
         return cn;
+    }
+
+    void tabFunction(char* str, int& strLength, const int maxStrLength, int& position, int& offset, unsigned int tabsize, const int fieldLength, const bool isInsert){
+        
+        int i = 0;
+
+        int maxStrCmp = isInsert ? strLength + tabsize:offset + position + tabsize;
+
+        if (maxStrCmp <= maxStrLength) {
+
+            if (!isInsert && offset + position + tabsize > strLength) {
+                str[tabsize + position + offset] = 0;
+            }   //OVERWRITE ONLY
+            
+            if(isInsert){
+                for (i = strLength + tabsize; i >= position + offset; i--) {
+                    str[i] = str[i - tabsize];
+                }   //INSERT ONLY
+            }
+
+            for (i = 0; i < tabsize; i++) {
+                str[i + position + offset] = ' ';
+            }   //SAME FOR BOTH
+
+            if (position + tabsize < fieldLength) {
+                position += tabsize;    //SAME FOR BOTH
+            }
+            else {
+                offset += position + tabsize - fieldLength + 1;
+                position = fieldLength - 1; //SAME
+            }
+
+            if(isInsert)
+                strLength += tabsize;   //INSERT ONLY
+        }
+        else {
+
+            if(isInsert){
+                for (i = maxStrLength; i >= position + offset; i--) {
+                    str[i] = str[i - (maxStrLength - strLength)];
+                }   //INSERT ONLY
+            }
+
+            for (i = 0; i < maxStrLength - strLength; i++) {
+                str[i + position + offset] = ' ';
+            }   //SAME FOR BOTH
+
+            if (position + maxStrLength - strLength < fieldLength) {
+                position += maxStrLength - strLength;
+            }
+            else {  //SAME FOR BOTH
+                offset += position + maxStrLength - strLength - fieldLength + 1;
+                position = fieldLength - 1;
+            }
+    
+            if(!isInsert)
+                str[maxStrLength] = 0; //OVR ONLY
+        }
+
     }
 
     Console console;
