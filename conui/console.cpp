@@ -23,7 +23,7 @@ namespace cui
                 putChar (str[i]);
             }
         }
-        if(curpos >= 0){
+        if (curpos >= 0) {
             setPos (row, col + curpos);
         }
     }
