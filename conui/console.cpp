@@ -243,7 +243,7 @@ namespace cui
         
         int i = 0;
 
-        int maxStrCmp = isInsert ? strLength + tabsize:offset + position + tabsize;
+        int maxStrCmp = isInsert ? strLength + tabsize : offset + position + tabsize;
 
         if (maxStrCmp <= maxStrLength) {
 
@@ -274,18 +274,20 @@ namespace cui
         }
         else {
 
-            if(isInsert){
+			maxStrCmp = isInsert ? strLength:offset + position;
+
+            if(isInsert){	//INSERT ONLY
                 for (i = maxStrLength; i >= position + offset; i--) {
                     str[i] = str[i - (maxStrLength - strLength)];
-                }   //INSERT ONLY
+                }   
             }
 
-            for (i = 0; i < maxStrLength - strLength; i++) {
+			for (i = 0; i < maxStrLength - maxStrCmp; i++) {
                 str[i + position + offset] = ' ';
-            }   //SAME FOR BOTH
+            }   
 
-            if (position + maxStrLength - strLength < fieldLength) {
-                position += maxStrLength - strLength;
+			if (position + maxStrLength - maxStrCmp < fieldLength) {
+				position += maxStrLength - maxStrCmp;
             }
             else {  //SAME FOR BOTH
                 offset += position + maxStrLength - strLength - fieldLength + 1;
