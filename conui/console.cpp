@@ -249,34 +249,34 @@ namespace cui
 
             if (!isInsert && offset + position + tabsize > strLength) {
                 str[tabsize + position + offset] = 0;
-            }   //OVERWRITE ONLY
+            }
             
-            if(isInsert){
+            if (isInsert) {
                 for (i = strLength + tabsize; i >= position + offset; i--) {
                     str[i] = str[i - tabsize];
-                }   //INSERT ONLY
+                }
             }
 
             for (i = 0; i < tabsize; i++) {
                 str[i + position + offset] = ' ';
-            }   //SAME FOR BOTH
+            }
 
             if (position + tabsize < fieldLength) {
-                position += tabsize;    //SAME FOR BOTH
+                position += tabsize;
             }
             else {
                 offset += position + tabsize - fieldLength + 1;
-                position = fieldLength - 1; //SAME
+                position = fieldLength - 1;
             }
 
-            if(isInsert)
-                strLength += tabsize;   //INSERT ONLY
+            if (isInsert)
+                strLength += tabsize;
         }
         else {
 
-			maxStrCmp = isInsert ? strLength:offset + position;
+			maxStrCmp = isInsert ? strLength : offset + position;
 
-            if(isInsert){	//INSERT ONLY
+            if (isInsert) {
                 for (i = maxStrLength; i >= position + offset; i--) {
                     str[i] = str[i - (maxStrLength - strLength)];
                 }   
@@ -289,13 +289,13 @@ namespace cui
 			if (position + maxStrLength - maxStrCmp < fieldLength) {
 				position += maxStrLength - maxStrCmp;
             }
-            else {  //SAME FOR BOTH
+            else {
                 offset += position + maxStrLength - strLength - fieldLength + 1;
                 position = fieldLength - 1;
             }
     
-            if(!isInsert)
-                str[maxStrLength] = 0; //OVR ONLY
+            if (!isInsert)
+                str[maxStrLength] = 0;
         }
 
     }
