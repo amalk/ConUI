@@ -18,8 +18,6 @@ namespace cui{
     };
 
     Console& operator>>(Console& cn, int& ch);
-<<<<<<< HEAD
-=======
 
     Console& operator<<(Console& cn, char ch);
 
@@ -29,25 +27,5 @@ namespace cui{
 
     extern Console console;
 }
-
-
-
-
-
-
-
-
-
->>>>>>> 8f8edb7f3a1344b06890c4ba3bcf9f4e42929988
-
-    Console& operator<<(Console& cn, char ch);
-
-    Console& operator<<(Console& cn, const char* str);
-
-	void tabFunction(char* str, int& strLength, int maxStrLength, int& position, int& offset, unsigned int tabsize, const int fieldLength, const bool isInsert);
-
-    extern Console console;
-}
-
 
 #endif
