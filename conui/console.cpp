@@ -168,14 +168,10 @@ namespace cui
             case TAB:
                 if (InTextEditor) {
                     if (insertMode) {
-                        
 						tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, true);
-
                     }
                     else {
-
 						tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, false);
-
                     }
                 }
                 else {
