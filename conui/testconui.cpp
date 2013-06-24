@@ -9,7 +9,7 @@ void prnbox(int row, int col, bool clear = false){
 }
 
 int main(){
-  char str[81] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPabcdefghijklmnopqrstuvwxyz0123456789AB";
+  char str[81] = "0123456789012345678901234567890123456789";
   //str[10] = 0;
   bool done = false;
   int row = 0;

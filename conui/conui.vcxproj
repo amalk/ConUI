@@ -78,7 +78,7 @@
   <ItemGroup>
     <ClCompile Include="bconsole.cpp" />
     <ClCompile Include="console.cpp" />
-    <ClCompile Include="cui_test.cpp" />
+    <ClCompile Include="testconui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />

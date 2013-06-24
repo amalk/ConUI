@@ -121,14 +121,18 @@ namespace cui
                 done = true;
                 break;
             case BACKSPACE:
-                if (*curPosition >= 1 || (*curPosition == 1 && *strOffset == 0)) {
+				if ((*curPosition >= 0 && *strOffset + *curPosition != 0) || (*curPosition == 1 && *strOffset == 0)) {
                     for (i = -1; str[*strOffset + *curPosition + i]; i++) {
                         str[*strOffset + *curPosition + i] = str[*strOffset + *curPosition + 1 + i];
                     }
                     (*curPosition)--;
                 }
-                if (*curPosition == 0 || *curPosition == 1) {
-                    if (*strOffset >= _tabsize) {
+                if (*curPosition < 1) {
+					if(fieldLength <= _tabsize && *strOffset > 0) {
+						*curPosition = fieldLength - 1;
+						*strOffset -= fieldLength;
+					}
+					else if (*strOffset >= _tabsize) {
                         *strOffset -= _tabsize;
                         *curPosition += _tabsize;
                     }
