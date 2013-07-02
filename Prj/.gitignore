@@ -1,0 +1,19 @@
+#Visual Studtio files
+*.sdf
+*.user
+*.suo
+*.opensdf
+Debug/
+ipch/
+
+# Compiled Object files
+*.slo
+*.lo
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
