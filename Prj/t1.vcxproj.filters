@@ -27,6 +27,12 @@
     <ClCompile Include="Test1Frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cfield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h">
@@ -39,6 +45,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cuigh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cdialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
