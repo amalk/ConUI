@@ -78,12 +78,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bconsole.cpp" />
+    <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
+    <ClCompile Include="clabel.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Test1Frame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />
+    <ClInclude Include="cfield.h" />
     <ClInclude Include="cframe.h" />
     <ClInclude Include="clabel.h" />
     <ClInclude Include="console.h" />
