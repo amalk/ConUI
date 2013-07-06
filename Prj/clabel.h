@@ -1,6 +1,8 @@
-#ifndef _CLABEL_H_
-#define _CLABEL_H_
+#ifndef __CLABEL_H__
+#define __CLABEL_H__
 #include "cfield.h"
+#include "bconsole.h"
+#include "console.h"
 
 namespace cui{
   class CLabel :  public CField{

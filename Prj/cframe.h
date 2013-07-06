@@ -63,6 +63,8 @@ public:
   int width()const;
 
   void refresh();
+
+
 };
 
 }

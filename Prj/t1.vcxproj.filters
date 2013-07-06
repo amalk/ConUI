@@ -24,6 +24,12 @@
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="clabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cfield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Test1Frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="clabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
