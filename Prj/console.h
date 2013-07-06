@@ -21,6 +21,8 @@ namespace cui{
     Console& operator>>(Console&, int&);
     Console& operator<<(Console&, char);
     Console& operator<<(Console&, const char*);
+    
+    void tabFunction(char* str, int& strLength, int maxStrLength, int& position, int& offset, unsigned int tabsize, const int fieldLength, const bool isInsert);
 
     extern Console console; // console object - external linkage
 }
