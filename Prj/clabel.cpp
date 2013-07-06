@@ -8,28 +8,26 @@ namespace cui{
 
      CLabel::CLabel(const char *Str, int Row, int Col, int Len): CField(Row, Col){
 		 if(!Len) {
-			 char* temp= new char(bio::strlen(&Str));
+			 char* temp= new char[bio::strlen(Str)];
 			 bio::strcpy (temp, Str);
 			 _data=temp;
-			 delete []temp;
 		 }	else
 		 {
-			 char* temp= new char(bio::strlen(&Str));
+			 char* temp= new char[bio::strlen(Str)];
 			 bio::strncpy (temp, Str, Len);
 			 _data=temp;
-			 delete []temp;
 		 }
 		 CFrame::width(bio::strlen(_data));
 	 }
 
 	 CLabel::CLabel(int Row, int Col, int Len){
-		 char* temp= new char(Len);
+		 char* temp= new char[Len];
 		 _data=temp;
-		 delete []temp;
 	 }
 
 	 CLabel::~CLabel(){
-		 delete []_data;
+		 if (_data) 
+			 delete []_data;
 	 }
 
 	 void CLabel::draw(int fn){
@@ -48,16 +46,14 @@ namespace cui{
 	 void CLabel::set(const void* str){
 		if(width()) {
 			delete []_data;
-			char* temp= new char(bio::strlen(&str));
+			char* temp= new char[bio::strlen(str)];
 			bio::strcpy (temp, str);
 			_data=temp;
-			delete []temp;
 		 }	else
 		 {
-			 char* temp= new char(width());
+			 char* temp= new char[width()];
 			 bio::strncpy (temp, str, width());
-			 _data=temp;
-			 delete []temp;
+			 _data=temp;			 
 		 }
 		 CFrame::width(bio::strlen(_data));
 	 }
