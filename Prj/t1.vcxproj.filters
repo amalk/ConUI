@@ -41,5 +41,8 @@
     <ClInclude Include="cuigh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
