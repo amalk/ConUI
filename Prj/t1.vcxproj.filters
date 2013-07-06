@@ -21,6 +21,9 @@
     <ClCompile Include="cframe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Test1Frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -38,10 +41,5 @@
     <ClInclude Include="cuigh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="console.obj">
-      <Filter>Source Files</Filter>
-    </Object>
   </ItemGroup>
 </Project>

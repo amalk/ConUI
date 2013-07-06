@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClCompile Include="bconsole.cpp" />
     <ClCompile Include="cframe.cpp" />
+    <ClCompile Include="console.cpp" />
     <ClCompile Include="Test1Frame.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -86,9 +87,6 @@
     <ClInclude Include="cframe.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="cuigh.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="console.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
