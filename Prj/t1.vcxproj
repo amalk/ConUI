@@ -86,8 +86,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />
-    <ClInclude Include="cbutton.h" />
-    <ClInclude Include="cfield.h" />
+    <ClInclude Include="cframe.h" />
+    <ClInclude Include="clabel.h" />
     <ClInclude Include="console.h" />
   </ItemGroup>
   <ItemGroup>
