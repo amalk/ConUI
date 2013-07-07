@@ -33,7 +33,7 @@ int main(){
   Screen<<new CLabel("Dialog and Label Tester", 0, 0);
 
   D.add(new CLabel("Testing Read Only Dialog",1, 12));
-  D << new CLabel("Another Dyanmic label goes here, and I want to make sure it will be trimmed", 3, 3, 45) << L;
+  D << new CLabel("Another Dynamic label goes here, and I want to make sure it will be trimmed", 3, 3, 45) << L;
   int mesIndx = D.add(new CLabel(7, 5, 40));
   D << new CLabel("ESC to exit, F6 to Move, other to loop", 9, 3);
   D[mesIndx].set("Setting the message to see what happens");
