@@ -82,7 +82,7 @@
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
     <ClCompile Include="console.cpp" />
-    <ClCompile Include="Test1Frame.cpp" />
+    <ClCompile Include="Test2DialogAndLabel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />
@@ -91,6 +91,9 @@
     <ClInclude Include="cframe.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="cuigh.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

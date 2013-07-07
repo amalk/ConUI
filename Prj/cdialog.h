@@ -2,9 +2,11 @@
 #define __CDIALOG_H__
 
 #include "cuigh.h"
+#include "console.h"
 #include "cframe.h"
 #include "cfield.h"
 namespace cui{
+  class CField;
   class CDialog: public CFrame{
     private:
     int _fnum;

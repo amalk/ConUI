@@ -21,16 +21,16 @@
     <ClCompile Include="cframe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="console.cpp">
+    <ClCompile Include="cfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test1Frame.cpp">
+    <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cdialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cfield.cpp">
+    <ClCompile Include="Test2DialogAndLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,11 +47,16 @@
     <ClInclude Include="cuigh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cdialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cdialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj">
+      <Filter>Source Files</Filter>
+    </Object>
   </ItemGroup>
 </Project>
