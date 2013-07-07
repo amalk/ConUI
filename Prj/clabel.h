@@ -1,12 +1,10 @@
 #ifndef __CLABEL_H__
 #define __CLABEL_H__
 #include "cfield.h"
-#include "bconsole.h"
 #include "console.h"
 
 namespace cui{
   class CLabel :  public CField{
-     //int _length;
   public:
      CLabel(const CLabel& L);
      CLabel(const char *Str, int Row, int Col, int Len = 0);
