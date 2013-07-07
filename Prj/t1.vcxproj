@@ -78,14 +78,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bconsole.cpp" />
-    <ClCompile Include="cbutton.cpp" />
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
+    <ClCompile Include="clabel.cpp" />
     <ClCompile Include="console.cpp" />
-    <ClCompile Include="Test4Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />
+    <ClInclude Include="cdialog.h" />
+    <ClInclude Include="cfield.h" />
     <ClInclude Include="cframe.h" />
     <ClInclude Include="clabel.h" />
     <ClInclude Include="console.h" />
@@ -93,6 +94,9 @@
   <ItemGroup>
     <Object Include="vc\cdialog.obj" />
     <Object Include="vc\clabel.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="cdialog.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
