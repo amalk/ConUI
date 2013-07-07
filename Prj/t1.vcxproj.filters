@@ -41,9 +41,15 @@
     <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj">
       <Filter>Resource Files</Filter>
     </Object>
+    <Object Include="cveditline.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clineedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

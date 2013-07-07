@@ -87,8 +87,10 @@
   <ItemGroup>
     <Object Include="..\..\20132notes\HeadersNobjects\vc\cdialog.obj" />
     <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj" />
+    <Object Include="cveditline.obj" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cfield.h" />
     <ClInclude Include="clineedit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
