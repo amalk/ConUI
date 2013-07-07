@@ -21,24 +21,29 @@
     <ClCompile Include="cframe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Test3DialogAndLineEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cfield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test1Frame.cpp">
+    <ClCompile Include="clineedit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bconsole.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cframe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="console.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cuigh.h">
+    <Object Include="..\..\20132notes\HeadersNobjects\vc\cdialog.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="clineedit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
