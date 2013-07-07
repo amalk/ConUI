@@ -3,9 +3,7 @@
 
 #include "bconsole.h"
 
-
 namespace cui{
-
 
     class Console: public bio::BConsole{
       static bool _insertMode;
