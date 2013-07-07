@@ -1,5 +1,5 @@
-#ifndef _FS_CONSOLE_H_
-#define _FS_CONSOLE_H_
+#ifndef __CONSOLE_H__
+#define __CONSOLE_H__
 
 #include "bconsole.h"
 
