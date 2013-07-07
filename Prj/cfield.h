@@ -3,7 +3,7 @@
 #define __CFIELD_H__
 #include "cframe.h"
 namespace cui{
-class CDialog;
+  class CDialog;
   class CField : public CFrame{
   protected:
     void* _data;
