@@ -11,7 +11,6 @@ namespace cui{
     bool* _insertmode;
     int _curpos;
     int _offset;
-	bool _bordered;	
   public:
     CLineEdit(char* Str, int Row, int Col, int Width,
       int Maxdatalen, bool* Insertmode, 
