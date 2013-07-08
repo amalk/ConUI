@@ -1,4 +1,3 @@
-#pragma once
 #ifndef __CFIELD_H__
 #define __CFIELD_H__
 #include "cframe.h"
