@@ -17,7 +17,7 @@ namespace cui{
 	}
 
 	void CMenuItem::draw(int fn){
-		
+
 		_Label.draw(fn);
 
 		if(_selected){
