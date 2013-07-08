@@ -61,10 +61,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj">
+    <Object Include="vc\cdialog.obj">
       <Filter>Resource Files</Filter>
     </Object>
-    <Object Include="..\..\20132notes\HeadersNobjects\vc\cdialog.obj">
+    <Object Include="vc\clabel.obj">
       <Filter>Resource Files</Filter>
     </Object>
   </ItemGroup>
