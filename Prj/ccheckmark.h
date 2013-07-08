@@ -11,7 +11,7 @@ namespace cui{
     char _format[4];
     CLabel _Label;
   public:
-    CCheckMark(bool Checked,const char* Format, const char* Text, int Row, int Col, int Width, bool IsRadio = false);
+    CCheckMark(bool Checked, const char* Format, const char* Text, int Row, int Col, int Width, bool IsRadio = false);
     CCheckMark(const CCheckMark& C);
     void draw(int fn = C_NO_FRAME) ;
     int edit();

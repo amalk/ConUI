@@ -1,6 +1,5 @@
 #include "clabel.h"
 
-
 namespace cui{
 
 	 CLabel::CLabel(const CLabel& L): CField(L.row(), L.col(), L.width(), L.height(), L.data()){		
