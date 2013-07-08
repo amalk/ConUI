@@ -11,6 +11,7 @@
 #ifndef __FS_CFRAME_H__
 #define __FS_CFRAME_H__
 #include "cuigh.h"
+#include "console.h"
 namespace cui{
 class CFrame{
   int _row;
