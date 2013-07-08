@@ -95,8 +95,8 @@
     <ClInclude Include="cuigh.h" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="..\..\20132notes\HeadersNobjects\vc\cdialog.obj" />
-    <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj" />
+    <Object Include="vc\cdialog.obj" />
+    <Object Include="vc\clabel.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

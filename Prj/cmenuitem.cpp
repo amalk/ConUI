@@ -2,15 +2,15 @@
 
 namespace cui{
 
-	CMenuItem::CMenuItem(bool Selected,const char* Format, const char* Text, int Row, int Col, int Width):CField(Row, Col, Width),
-			_Label(Text, 0, 1, Width - 2){
+	CMenuItem::CMenuItem(bool Selected,const char* Format, const char* Text, int Row, int Col, int Width)
+              : CField(Row, Col, Width, 1), _Label(Text, 0, 1, Width - 2) {
 		_selected = Selected;
 		bio::strcpy(_format, Format);
 		_data = &_format;
 		_Label.frame(this);
 	}
 
-	CMenuItem::CMenuItem(const CMenuItem &CM):_Label(CM._Label){
+	CMenuItem::CMenuItem(const CMenuItem &CM) : CField(CM), _Label(CM._Label){
 		_selected = CM.selected();
 		_data = &_format;
 		_Label.frame(this);
@@ -21,14 +21,15 @@ namespace cui{
 		_Label.draw(fn);
 
 		if(_selected){
-			//console.strdsp(&_format[0], absRow() + fn, absCol());
-			console.strdsp(&_format[1], absRow() + fn, absCol()+bio::strlen((char*)_Label.data())+ 1);
+			console.strdsp(&_format[0], absRow(), absCol(), 1);
+			console.strdsp(&_format[1], absRow(), absCol()+bio::strlen((char*)_Label.data()) + 1, 1);
 		}
 		else{
-			console.strdsp(" ", absRow() + fn, absCol() - 1);
-			console.strdsp(" ", absRow() + fn, absCol()+bio::strlen((char*)_Label.data()) + 1);
+			console.strdsp(" ", absRow(), absCol() - 1);
+			console.strdsp(" ", absRow(), absCol()+bio::strlen((char*)_Label.data()) + 1);
 		}
-		_Label.draw(fn);
+
+        console.setPos(absRow(), absCol() + 1);
 	}
 
 	int CMenuItem::edit(){
@@ -49,7 +50,7 @@ namespace cui{
 	}
 
 	void CMenuItem::set(const void* Selected){
-		_selected = (bool)Selected;
+		_selected = *(bool*)Selected;
 	}
 
 	bool CMenuItem::selected()const{
