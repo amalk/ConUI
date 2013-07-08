@@ -81,8 +81,10 @@
     <ClCompile Include="ccheckmark.cpp" />
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
+    <ClCompile Include="clabel.cpp" />
     <ClCompile Include="cmenuitem.cpp" />
     <ClCompile Include="console.cpp" />
+    <ClCompile Include="Test9MenuItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />
@@ -95,11 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="vc\cdialog.obj" />
-    <Object Include="vc\clabel.obj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="vc\cdialog.obj" />
-    <Object Include="vc\clabel.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

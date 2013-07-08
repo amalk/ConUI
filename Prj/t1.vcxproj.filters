@@ -24,19 +24,22 @@
     <ClCompile Include="cfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test6Check.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="console.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Test9MenuItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cmenuitem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccheckmark.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test9MenuItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,12 +71,12 @@
     <ClInclude Include="cfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cframe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Object Include="vc\cdialog.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
-    <Object Include="vc\clabel.obj">
       <Filter>Resource Files</Filter>
     </Object>
   </ItemGroup>
