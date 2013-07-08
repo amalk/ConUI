@@ -78,15 +78,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bconsole.cpp" />
+    <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
+    <ClCompile Include="cmenuitem.cpp" />
     <ClCompile Include="console.cpp" />
-    <ClCompile Include="Test1Frame.cpp" />
+    <ClCompile Include="Test9MenuItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />
+    <ClInclude Include="cdialog.h" />
+    <ClInclude Include="cfield.h" />
     <ClInclude Include="cframe.h" />
+    <ClInclude Include="clabel.h" />
+    <ClInclude Include="cmenuitem.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="cuigh.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\..\20132notes\HeadersNobjects\vc\cdialog.obj" />
+    <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
