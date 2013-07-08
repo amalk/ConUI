@@ -30,7 +30,13 @@
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ccheckmark.cpp">
+    <ClCompile Include="Test9MenuItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cfield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmenuitem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,13 +56,16 @@
     <ClInclude Include="cfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cmenuitem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="cdialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cframe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ccheckmark.h">
+    <ClInclude Include="cfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

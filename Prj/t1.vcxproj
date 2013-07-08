@@ -81,17 +81,21 @@
     <ClCompile Include="ccheckmark.cpp" />
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
+    <ClCompile Include="cmenuitem.cpp" />
     <ClCompile Include="console.cpp" />
-    <ClCompile Include="Test6Check.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />
-    <ClInclude Include="ccheckmark.h" />
     <ClInclude Include="cdialog.h" />
     <ClInclude Include="cfield.h" />
     <ClInclude Include="cframe.h" />
     <ClInclude Include="clabel.h" />
+    <ClInclude Include="cmenuitem.h" />
     <ClInclude Include="console.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="vc\cdialog.obj" />
+    <Object Include="vc\clabel.obj" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="vc\cdialog.obj" />
