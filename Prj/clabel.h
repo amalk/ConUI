@@ -18,4 +18,5 @@ namespace cui{
      void set(const void* str);
   };
 }
+
 #endif
