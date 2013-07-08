@@ -5,17 +5,14 @@
 // Nov 13 2011
 // Version 0.9
 
-
-
-#pragma once
 #ifndef __CTEXT_H__
 #define __CTEXT_H__
 
 #include "cfield.h"
 #include "text.h"
+#include "console.h"
 
 namespace cui{
-
 
   class CText:public CField{
     Text _T;
@@ -31,16 +28,18 @@ namespace cui{
     CText(const char* Str, int Row, int Col, int Width, int Height,
       bool* Insertmode, bool displayOnly = false, 
       const char* Border=C_BORDER_CHARS);
+    
     void draw(int fn = C_FULL_FRAME);
 
     void set(const void *Str);
-    void *data()const;
+    void* data()const;
 
-      int edit();
+    int edit();
     bool  editable()const;
     bool displayOnly();
     void displayOnly(bool val);
   };
 
 }
+
 #endif
