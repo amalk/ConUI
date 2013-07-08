@@ -3,7 +3,7 @@
 namespace cui {
 
     CCheckMark::CCheckMark(bool Checked, const char* Format, const char* Text, int Row, int Col, int Width, bool IsRadio)
-        : CField(Row, Col, Width, 1), _Label(Text, Row, Col, Width-4) {
+        : CField(Row, Col, Width, 1), _Label(Text, 0, 4, Width-4) {
             _Label.frame(this);
             _flag = Checked;
             _radio = IsRadio;

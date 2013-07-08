@@ -81,7 +81,6 @@
     <ClCompile Include="ccheckmark.cpp" />
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
-    <ClCompile Include="clabel.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Test6Check.cpp" />
   </ItemGroup>
@@ -96,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="vc\cdialog.obj" />
+    <Object Include="vc\clabel.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

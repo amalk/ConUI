@@ -21,16 +21,13 @@
     <ClCompile Include="cframe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="console.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clabel.cpp">
+    <ClCompile Include="Test6Check.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test6Check.cpp">
+    <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ccheckmark.cpp">
@@ -65,6 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="vc\cdialog.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="vc\clabel.obj">
       <Filter>Resource Files</Filter>
     </Object>
   </ItemGroup>
