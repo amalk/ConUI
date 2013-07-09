@@ -21,36 +21,63 @@
     <ClCompile Include="cframe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test3DialogAndLineEdit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clineedit.cpp">
+    <ClCompile Include="cfield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmenuitem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccheckmark.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test9MenuItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="..\..\20132notes\HeadersNobjects\vc\cdialog.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
-    <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
-    <Object Include="cveditline.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="clineedit.h">
+    <ClInclude Include="console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bconsole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cfield.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmenuitem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cdialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cfield.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cframe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="vc\cdialog.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
   </ItemGroup>
 </Project>
