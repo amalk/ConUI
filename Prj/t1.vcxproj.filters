@@ -36,10 +36,13 @@
     <ClCompile Include="ccheckmark.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test9MenuItem.cpp">
+    <ClCompile Include="clabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clabel.cpp">
+    <ClCompile Include="Test10Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,9 +77,27 @@
     <ClInclude Include="cframe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cuigh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cbutton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clineedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Object Include="vc\cdialog.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="vc\cbutton.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="vc\clineedit.obj">
       <Filter>Resource Files</Filter>
     </Object>
   </ItemGroup>
