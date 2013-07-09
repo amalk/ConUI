@@ -2,7 +2,6 @@
 #define __CLABEL_H__
 
 #include "cfield.h"
-#include "console.h"
 
 namespace cui{
   class CLabel :  public CField{

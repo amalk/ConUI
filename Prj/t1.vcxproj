@@ -78,16 +78,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bconsole.cpp" />
+    <ClCompile Include="cbutton.cpp" />
     <ClCompile Include="ccheckmark.cpp" />
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
     <ClCompile Include="clabel.cpp" />
     <ClCompile Include="cmenuitem.cpp" />
     <ClCompile Include="console.cpp" />
-    <ClCompile Include="Test9MenuItem.cpp" />
+    <ClCompile Include="Test7CCheckList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />
+    <ClInclude Include="cchecklist.h" />
+    <ClInclude Include="ccheckmark.h" />
     <ClInclude Include="cdialog.h" />
     <ClInclude Include="cfield.h" />
     <ClInclude Include="cframe.h" />
@@ -96,7 +99,9 @@
     <ClInclude Include="console.h" />
   </ItemGroup>
   <ItemGroup>
+    <Object Include="vc\cchecklist.obj" />
     <Object Include="vc\cdialog.obj" />
+    <Object Include="vc\clineedit.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
