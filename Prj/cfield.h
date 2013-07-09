@@ -1,6 +1,8 @@
 #ifndef __CFIELD_H__
 #define __CFIELD_H__
+
 #include "cframe.h"
+
 namespace cui{
   class CDialog;
   class CField : public CFrame{
