@@ -30,7 +30,7 @@ namespace cui{
     bool goNext();
     bool goPrev();
     CButton _Title;
-    void drawItems(int fn);
+
   public:
     static const bool Select;
     CMenu(const char* Title, const char* Format, int Row, int Col, 
