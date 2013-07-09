@@ -36,10 +36,16 @@
     <ClCompile Include="ccheckmark.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test9MenuItem.cpp">
+    <ClCompile Include="Test5ValEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cbutton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="clabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cveditline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,9 +80,18 @@
     <ClInclude Include="cframe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clineedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cveditline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Object Include="vc\cdialog.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="clineedit.obj">
       <Filter>Resource Files</Filter>
     </Object>
   </ItemGroup>
