@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClCompile Include="bconsole.cpp" />
     <ClCompile Include="cbutton.cpp" />
+    <ClCompile Include="cchecklist.cpp" />
     <ClCompile Include="ccheckmark.cpp" />
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
@@ -99,7 +100,6 @@
     <ClInclude Include="console.h" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="vc\cchecklist.obj" />
     <Object Include="vc\cdialog.obj" />
     <Object Include="vc\clineedit.obj" />
   </ItemGroup>
