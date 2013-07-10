@@ -10,6 +10,7 @@ namespace cui{
 		 _data = Str;
 		 _maxdatalen=Maxdatalen;
 		 _insertmode=Insertmode;
+		 _curpos = _offset =  0 ;
 	}
 
     CLineEdit::CLineEdit(int Row, int Col, int Width,
@@ -20,6 +21,7 @@ namespace cui{
 		_dyn=true;
 		_maxdatalen=Maxdatalen;
 		_insertmode=Insertmode;
+		_curpos = _offset =  0 ;
 	}
 
 	CLineEdit::~CLineEdit(){
