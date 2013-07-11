@@ -16,7 +16,7 @@ namespace cui {
 
     CCheckList& CCheckList::add(const char* Text, bool selected) {
         if(_cnt < 32) {
-            _checkmarks[_cnt] = new CCheckMark(selected, _format, Text, _cnt + 1, 1, bio::strlen(Text) + 4);
+            _checkmarks[_cnt] = new CCheckMark(selected, _format, Text, _cnt + 1, 1, bio::strlen(Text) + 4, _radio);
             _checkmarks[_cnt]->frame(this);
             
             if(_checkmarks[_cnt]->width() > this->width())
@@ -29,7 +29,7 @@ namespace cui {
                 unsigned int j;
 
                 for(i = 1, j = 0; j < _cnt; j++)
-                    i *= 2;
+                    i <<= 1;    // i *= 2
 
                 _flags += i;
             }
@@ -49,7 +49,7 @@ namespace cui {
         for(i = 0; i < _cnt; i++)
             _checkmarks[i]->draw();
 
-        //console.setPos(absRow(), absCol()+1);   // to first selected index
+        _cur = selectedIndex();
     }
 
     int CCheckList::edit() {
@@ -74,21 +74,44 @@ namespace cui {
                     _cur--;
                 break;
             case SPACE:
-                selectedIndex(_cur);
+                unsigned int i;
+                if(_radio)
+                    for(i = 0; i < _cnt; i++)
+                        if(i != _cur)
+                            _checkmarks[i]->checked(false);
+
+                for(i = 0; i < _cnt; i++)
+                    _checkmarks[i]->draw();
+
                 break;
+            default:
+                done = true;
             }
         }
         return key;
     }
 
-    void* CCheckList::data()const {
+    void* CCheckList::data()const {                // <<<<<<<<< NEEDS ATTENTION <<<<<<<<<<< //
+        unsigned int i;
+        unsigned int j;
+
+        for(i = 1, j = 0; j < _cnt; j++)
+            ;
+        
         return (void*)_flags;
     }
 
     void CCheckList::set(const void* data) {
         _flags = *(unsigned int*)data;
 
+        unsigned int i = _flags;
+        unsigned int j = _cnt - 1;
+        unsigned int k;
 
+        for(k = 0; j >= 0; j--) {
+            k = i >> j;                         // start extracting from the leftmost bit and continue right
+            _checkmarks[j]->checked(k & 1);     // only the rightmost bit is significant
+        }
 
     }
 
@@ -106,8 +129,8 @@ namespace cui {
 
     void CCheckList::radio(bool val) {
         _radio = val;
-        unsigned int i = 0;
-        while(i < _cnt)
+        unsigned int i;
+        for(i = 0; i < _cnt; i++)
             _checkmarks[i]->radio(_radio);
     }
 
@@ -129,12 +152,13 @@ namespace cui {
     }
 
     void CCheckList::selectedIndex(unsigned int index) {
-        if(_radio) {
+        if(_radio || index < 0) {
             unsigned int i;
             for(i = 0; i < _cnt; i++)
                 _checkmarks[i]->checked(false);
         }
-        _checkmarks[index]->checked(true);
+        if(index >= 0)
+            _checkmarks[index]->checked(true);
     }
 
     unsigned int CCheckList::length() {
