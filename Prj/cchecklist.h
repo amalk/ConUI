@@ -21,7 +21,7 @@ namespace cui{
     CCheckList& operator<<(const char* Text);
     void draw(int fn = C_FULL_FRAME);
     int edit();
-    void* data()const;
+    void* data();
     void set(const void* data);
     CCheckMark& operator[](unsigned int index);
     bool editable()const;
