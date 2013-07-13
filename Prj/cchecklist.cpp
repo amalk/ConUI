@@ -49,7 +49,9 @@ namespace cui {
         for(i = 0; i < _cnt; i++)
             _checkmarks[i]->draw();
 
-        _cur = selectedIndex();
+        i = selectedIndex();
+        _cur = i == -1 ? 0 : i;     // _cur is used as an index in the edit() function
+                                    // cursor is placed under first checkmark if none is selected
     }
 
     int CCheckList::edit() {
@@ -91,12 +93,12 @@ namespace cui {
         return key;
     }
 
-    void* CCheckList::data()const {                // <<<<<<<<< NEEDS ATTENTION <<<<<<<<<<< //
+    void* CCheckList::data() {
         unsigned int i;
-        unsigned int j;
 
-        for(i = 1, j = 0; j < _cnt; j++)
-            ;
+        for(i = 0; i < _cnt; i++)
+            if(_checkmarks[i]->checked())
+                _flags += 1 << i;   // same as pow(2, i)
         
         return (void*)_flags;
     }
