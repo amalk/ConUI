@@ -81,6 +81,7 @@
     <ClCompile Include="cdialog.cpp" />
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
+    <ClCompile Include="console.cpp" />
     <ClCompile Include="Test3DialogAndLineEdit.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -93,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj" />
-    <Object Include="..\..\20132notes\HeadersNobjects\vc\console.obj" />
     <Object Include="clineedit.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
