@@ -48,9 +48,6 @@
     <ClCompile Include="cbutton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ctext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -93,6 +90,9 @@
   <ItemGroup>
     <Object Include="vc\cdialog.obj">
       <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="vc\ctext.obj">
+      <Filter>Source Files</Filter>
     </Object>
   </ItemGroup>
 </Project>
