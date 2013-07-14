@@ -31,12 +31,12 @@ namespace cui {
         int i = 0;
         int z = _T[i].strlen();
         while(i < height() - 2){
-            if(_T[i].strlen() > _offset){
-                if(_T[i].strlen() >= width() - 2){
+            if(_T[_loffset + i].strlen() > _offset){
+                if(_T[_loffset + i].strlen() >= width() - 2){
                     console.strdsp(&(((char*)_T[_loffset + i])[_offset]), absRow() + i + 1, absCol() + 1, width() - 2, _curpos);
                 }
                 else{
-                    console.strdsp(&(((char*)_T[_loffset + i])[_offset]), absRow() + i + 1, absCol() + 1, _T[i].strlen(), _curpos);
+                    console.strdsp(&(((char*)_T[_loffset + i])[_offset]), absRow() + i + 1, absCol() + 1, _T[_loffset + i].strlen(), _curpos);
                 }
             }
             i++;
@@ -48,7 +48,7 @@ namespace cui {
     }
 
     void* CText::data()const {
-        return (void*)&_T;
+        return (void*)_T.exportString();
     }
 
     int CText::edit() {
@@ -96,8 +96,7 @@ namespace cui {
                 _T.insertAt(_loffset + _lcurpos);
                 bio::strncpy((char*)_T[_lcurpos + _loffset], (char*)_T[_lcurpos + _loffset + 1], _curpos + _offset);   //Current line is set to everything before the cursor before enter was pressed
                 _T[_lcurpos + _loffset + 1] = &((char*)_T[_lcurpos + _loffset + 1])[_curpos + _offset];
-                ((char*)_T[_lcurpos + _loffset])[_curpos + _offset] = '\n';
-                ((char*)_T[_lcurpos + _loffset])[_curpos + _offset + 1] = '\0';
+                ((char*)_T[_lcurpos + _loffset])[_curpos + _offset] = '\0';
                 
                 if(_lcurpos < height() - 3){
                     _lcurpos++;
@@ -108,42 +107,17 @@ namespace cui {
                 _curpos = 0;
                 _offset = 0;
                 break;
-            case PGUP:
-                if(_lcurpos + _loffset - height() >= 0){
-                    _lcurpos = 0;
-                    _loffset -= height();
-                }
-                done = true;
-                break;
-            case PGDN:
-                if(_lcurpos + _loffset + height() <= _T.textLines() - 1){
-                    _lcurpos += height() - 3;
-                    _loffset += height();
-                }
-                done = true;
-                break;
             case ESCAPE:
                 _T = local_T;
                 _curpos = local_curpos;
                 _offset = local_offset;
                 _lcurpos = local_lcurpos;
                 _loffset = local_loffset;
-            case F (1):
-            case F (2):
-            case F (3):
-            case F (4):
-            case F (5):
-            case F (6):
-            case F (7):
-            case F (8):
-            case F (9):
-            case F (10):
-            case F (11):
-            case F (12):
+                break;
+            default:
                 done = true;
                 break;
             }
-
         }
 
         return key;

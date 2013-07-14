@@ -81,141 +81,142 @@ namespace cui
                 done = true;
                 terminate = true;
             }
+            else{
+                strdsp (str + *strOffset, row, col, fieldLength, *curPosition);
+                key = console.getKey ();
+                strLength = bio::strlen (str);
 
-            strdsp (str + *strOffset, row, col, fieldLength, *curPosition);
-            key = console.getKey ();
-            strLength = bio::strlen (str);
-
-            switch (key) {
-            case LEFT:
-                if (*curPosition) {
-                    (*curPosition)--;
-                }
-                else if (*strOffset) {
-                    (*strOffset)--;
-                }
-                break;
-            case RIGHT:
-                if ((*curPosition != fieldLength - 1) && (str[*curPosition + *strOffset])) {
-                    (*curPosition)++;
-                }
-                else if (*strOffset + fieldLength < strLength + 1) {
-                    (*strOffset)++;
-                }
-                break;
-            case HOME:
-                *strOffset = *curPosition = 0;
-                break;
-            case END:
-                if (*strOffset + fieldLength < strLength) {
-                    *strOffset = strLength - fieldLength + 1;
-                }
-                *curPosition = strLength - *strOffset;
-                break;
-            case ESCAPE:
-                if (!InTextEditor) {
-                    bio::strcpy (str, strOriginal);
-                    *strOffset = offsetOriginal;
-                    *curPosition = curPosOriginal;
-                }
-                done = true;
-                break;
-            case BACKSPACE:
-				if ((*curPosition >= 0 && *strOffset + *curPosition != 0) || (*curPosition == 1 && *strOffset == 0)) {
-                    for (i = -1; str[*strOffset + *curPosition + i]; i++) {
-                        str[*strOffset + *curPosition + i] = str[*strOffset + *curPosition + 1 + i];
+                switch (key) {
+                case LEFT:
+                    if (*curPosition) {
+                        (*curPosition)--;
                     }
-                    (*curPosition)--;
-                }
-                if (*curPosition < 1) {
-					if(fieldLength <= _tabsize && *strOffset > 0) {
-						*curPosition = fieldLength - 1;
-						*strOffset -= fieldLength;
-					}
-					else if (*strOffset >= _tabsize) {
-                        *strOffset -= _tabsize;
-                        *curPosition += _tabsize;
+                    else if (*strOffset) {
+                        (*strOffset)--;
                     }
-                    else {
-                        *curPosition += *strOffset;
-                        *strOffset = 0;
+                    break;
+                case RIGHT:
+                    if ((*curPosition != fieldLength - 1) && (str[*curPosition + *strOffset])) {
+                        (*curPosition)++;
                     }
-                }
-                break;
-            case DEL:
-                for (i = 0; str[*strOffset + *curPosition + i]; i++) {
-                    str[*strOffset + *curPosition + i] = str[*strOffset + *curPosition + 1 + i];
-                }
-                break;
-            case INSERT:
-                insertMode = !insertMode;
-                break;
-            case ENTER:
-            case UP:
-            case DOWN:
-            case PGUP:
-            case PGDN:
-            case F (1):
-            case F (2):
-            case F (3):
-            case F (4):
-            case F (5):
-            case F (6):
-            case F (7):
-            case F (8):
-            case F (9):
-            case F (10):
-            case F (11):
-            case F (12):
-                done = true;
-                break;
-            case TAB:
-                if (InTextEditor) {
-                    if (insertMode) {
-                        
-                        tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, true);
-
+                    else if (*strOffset + fieldLength < strLength + 1) {
+                        (*strOffset)++;
                     }
-                    else {
-
-                        tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, false);
-
+                    break;
+                case HOME:
+                    *strOffset = *curPosition = 0;
+                    break;
+                case END:
+                    if (*strOffset + fieldLength < strLength) {
+                        *strOffset = strLength - fieldLength + 1;
                     }
-                }
-                else {
+                    *curPosition = strLength - *strOffset;
+                    break;
+                case ESCAPE:
+                    if (!InTextEditor) {
+                        bio::strcpy (str, strOriginal);
+                        *strOffset = offsetOriginal;
+                        *curPosition = curPosOriginal;
+                    }
                     done = true;
-                }
-                break;
-            default:
-                if (key >= ' ' && key <= '~') {
-                    if (insertMode) {
-                        if (strLength < maxStrLength) {
-                            for (i = strLength; i != *curPosition + *strOffset; i--) {
-                                str[i] = str[i - 1];
-                            }
-                            strLength++;
-                            str[*strOffset + *curPosition] = key;
-                            if (*curPosition != fieldLength - 1) {
-                                (*curPosition)++;
-                            }
-                            else if (*curPosition + *strOffset < strLength) {
-                                (*strOffset)++;
-                            }
+                    break;
+                case BACKSPACE:
+				    if ((*curPosition >= 0 && *strOffset + *curPosition != 0) || (*curPosition == 1 && *strOffset == 0)) {
+                        for (i = -1; str[*strOffset + *curPosition + i]; i++) {
+                            str[*strOffset + *curPosition + i] = str[*strOffset + *curPosition + 1 + i];
+                        }
+                        (*curPosition)--;
+                    }
+                    if (*curPosition < 1) {
+					    if(fieldLength <= _tabsize && *strOffset > 0) {
+						    *curPosition = fieldLength - 1;
+						    *strOffset -= fieldLength;
+					    }
+					    else if (*strOffset >= _tabsize) {
+                            *strOffset -= _tabsize;
+                            *curPosition += _tabsize;
+                        }
+                        else {
+                            *curPosition += *strOffset;
+                            *strOffset = 0;
                         }
                     }
-                    else if (strLength < maxStrLength || *curPosition + *strOffset < strLength) {
-                        strLength < maxStrLength && strLength++;
-                        str[*strOffset + *curPosition] = key;
-                        if (*curPosition != fieldLength - 1)
-                            (*curPosition)++;
-                        else if (*curPosition + *strOffset < strLength)
-                            (*strOffset)++;
+                    break;
+                case DEL:
+                    for (i = 0; str[*strOffset + *curPosition + i]; i++) {
+                        str[*strOffset + *curPosition + i] = str[*strOffset + *curPosition + 1 + i];
                     }
-                }
-                str[strLength] = 0;
-                break;
-            }
-        }
+                    break;
+                case INSERT:
+                    insertMode = !insertMode;
+                    break;
+                case ENTER:
+                case UP:
+                case DOWN:
+                case PGUP:
+                case PGDN:
+                case F (1):
+                case F (2):
+                case F (3):
+                case F (4):
+                case F (5):
+                case F (6):
+                case F (7):
+                case F (8):
+                case F (9):
+                case F (10):
+                case F (11):
+                case F (12):
+                    done = true;
+                    break;
+                case TAB:
+                    if (InTextEditor) {
+                        if (insertMode) {
+                        
+                            tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, true);
+
+                        }
+                        else {
+
+                            tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, false);
+
+                        }
+                    }
+                    else {
+                        done = true;
+                    }
+                    break;
+                default:
+                    if (key >= ' ' && key <= '~') {
+                        if (insertMode) {
+                            if (strLength < maxStrLength) {
+                                for (i = strLength; i != *curPosition + *strOffset; i--) {
+                                    str[i] = str[i - 1];
+                                }
+                                strLength++;
+                                str[*strOffset + *curPosition] = key;
+                                if (*curPosition != fieldLength - 1) {
+                                    (*curPosition)++;
+                                }
+                                else if (*curPosition + *strOffset < strLength) {
+                                    (*strOffset)++;
+                                }
+                            }
+                        }
+                        else if (strLength < maxStrLength || *curPosition + *strOffset < strLength) {
+                            strLength < maxStrLength && strLength++;
+                            str[*strOffset + *curPosition] = key;
+                            if (*curPosition != fieldLength - 1)
+                                (*curPosition)++;
+                            else if (*curPosition + *strOffset < strLength)
+                                (*strOffset)++;
+                        }
+                    }
+                    str[strLength] = 0;
+                    break;
+                }   // switch
+            }       // else
+        }           // while
 
         if (ReadOnly)
             bio::strcpy (str, strOriginal);

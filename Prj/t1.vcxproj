@@ -85,6 +85,7 @@
     <ClCompile Include="clabel.cpp" />
     <ClCompile Include="cmenuitem.cpp" />
     <ClCompile Include="console.cpp" />
+    <ClCompile Include="ctext.cpp" />
     <ClCompile Include="Test8Text.cpp" />
     <ClCompile Include="text.cpp" />
   </ItemGroup>
@@ -101,7 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="vc\cdialog.obj" />
-    <Object Include="vc\ctext.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
