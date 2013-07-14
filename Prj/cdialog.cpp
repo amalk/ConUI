@@ -2,170 +2,195 @@
 
 using namespace cui;
 
-CDialog::CDialog(CFrame *Container,
-            int Row, int Col, 
-            int Width, int Height, 
-            bool Bordered,
-            const char* Border){
+CDialog::CDialog(CFrame *Container, int Row, int Col, int Width, int Height, 
+                 bool Bordered, const char* Border)
+                 : CFrame(Row, Col, Width, Height, Bordered, Border, Container)
+{
 
-	int ctr = 0;
-	_fnum = 0;
-	_fldSize = C_INITIAL_NO_FIELDS;
-	_curidx = -1;
-	_editable = false;
-	
-	_dyn = new bool[_fldSize];
-	_fld = new CField*[_fldSize];
+    _fnum = 0;
+    _fldSize = C_INITIAL_NO_FIELDS;
+    _curidx = -1;
+    _editable = false;
+    
+    _dyn = new bool[_fldSize];
+    _fld = new CField*[_fldSize];
 
-	while(ctr < _fldSize){
-		_dyn[ctr] = false;
-		_fld[ctr] = (CField*)0;
-		ctr++;
-	}
-	
+    unsigned int i;
+
+    for(i = 0; i < _fldSize; i++){
+        _dyn[i] = false;
+        _fld[i] = 0;
+    }
+    
 }
 
 CDialog::~CDialog(){
 
-	int i = 0;
+    int i;
 
-	for(i; i < _fnum; i ++){
-		if(_dyn[i]) 
-			delete _fld[i];
-	}
+    for(i = 0; i < _fnum; i++){
+        if(_dyn[i]) 
+            delete _fld[i];
+    }
 
-	delete [] _dyn;
-	delete [] _fld;
+    delete [] _dyn;
+    delete [] _fld;
 
 }
 
 void CDialog::draw(int fn){
 
-	int i = 0;
-	
-	if(fn == C_FULL_FRAME){
-		CFrame::draw();
-		while(i < _fnum){
-			_fld[i]->draw(fn);	//Calls the CField draw for all fields in dialog
-			i++;
-		}
-	}
-	else if(fn == 0){
-		while(i < _fnum){
-			_fld[i++]->draw(fn);	//Calls the field's draw for all fields in dialog
-		}
-	}
-	else if(fn > 0){
-		_fld[fn]->draw(fn);		//Draws a single field with the fields draw
-	}
+    int i = 0;
+    
+    switch(fn) {
+    case C_FULL_FRAME:
+        CFrame::draw();     // fallthrough
+    case 0:
+        while(i < _fnum)
+            _fld[i++]->draw(fn);
+        break;
+    default:
+        if(fn > 0)
+            _fld[fn-1]->draw(fn);
+        break;
+    }
 }
 
 int CDialog::edit(int fn){
 
-	int key = 0;
-	int done = false;
-	int i = _curidx;
+    int key = 0;
 
-	if(!_editable){			//CDialog has no editable fields
-		key = console.getKey();
-	}
-	else if(fn < 1){		//Go to the 
-		draw(fn);
-		while(!done){
-			if(_fld[i]->editable()){
-				_fld[i]->edit();
-				done = true;
-			}
-			i++;
-		}
-		_curidx = i - 1;
-	}
-	else {
-		i = fn - 1;
-		while(!done){
-			if(_fld[i]->editable()){
-				key = _fld[i]->edit();
-				switch(key){
-				case UP:
-					i--;
-					while(i >= 0){
-						if(_fld[i]->editable()){
-							_curidx = i;
-							i = -1;
-						}
-						else if(i == 0){
-							i = _fnum;
-						}
-						i--;
-					}
-					break;
-				case ENTER:
-				case DOWN:
-				case TAB:
-					while(i < _fnum){
-						i++;
-						if(_fld[i]->editable()){
-							_curidx = i;
-							i = -2;
-						}
-						else if(i == _fnum){
-							i = -1;
-						}
-					}
-					break;
-				}
+    if(!_editable){
+        draw(0);
+        key = console.getKey();
+    }
+    else{
+        bool done = false;
+        bool foundEditable;
+        int firstEditable;
+        int lastEditable;
+        int i;
 
-			}
-			i++;
-			if(i == _fnum)
-				i = 0;
-		}
-	}
 
-	return key;
+        for(i = 0, foundEditable = false; i < _fnum && !foundEditable; i++)
+            (_fld[i]->editable()) && (foundEditable = true);
+
+        firstEditable = i - 1;
+
+
+        for(i = _fnum - 1, foundEditable = false; i >= 0 && !foundEditable; i--)
+            (_fld[i]->editable()) && (foundEditable = true);
+
+        lastEditable = i + 1;
+
+
+        if(fn <= 0) {
+            draw(fn);
+            _curidx = 0;
+        }
+        else
+            _curidx = fn - 1;
+
+
+        for(foundEditable = false; _curidx < _fnum && !foundEditable; _curidx++)
+            (_fld[_curidx]->editable()) && (foundEditable = true);
+
+        _curidx--;    // last iteration of the loop
+
+        !foundEditable && (_curidx = firstEditable);
+
+        while(!done){
+            key = _fld[_curidx]->edit();
+            switch(key){
+            case UP:
+                for(--_curidx, foundEditable = false; _curidx >= 0 && !foundEditable; _curidx--)
+                    (_fld[_curidx]->editable()) && (foundEditable = true);
+                    
+                _curidx++;
+
+                (_curidx < firstEditable) && (_curidx = lastEditable);
+                break;
+            case ENTER:
+            case DOWN:
+            case TAB:
+                for(++_curidx, foundEditable = false; _curidx < _fnum && !foundEditable; _curidx++)
+                    (_fld[_curidx]->editable()) && (foundEditable = true);
+                    
+                _curidx--;
+
+                (_curidx > lastEditable) && (_curidx = firstEditable);
+                break;
+            default:
+                done = true;
+                draw(0);
+                break;
+            }   // switch
+        }   // while
+    }   // else
+
+    return key;
 }
  
 int CDialog::add(CField* field, bool dynamic){
 
-	if(_fnum == _fldSize){
-		int i = 0;
-		CField** tempf = new CField*[_fldSize + C_DIALOG_EXPANSION_SIZE];
-		bool* tempd = new bool[_fldSize + C_DIALOG_EXPANSION_SIZE];
+    if(_fnum == _fldSize){
+        CField** tempf = new CField*[_fldSize + C_DIALOG_EXPANSION_SIZE];
+        bool* tempd = new bool[_fldSize + C_DIALOG_EXPANSION_SIZE];
 
-		for(; i < _fldSize; i++){
-			tempf[i] = _fld[i];
-			tempd[i] = _dyn[i];
-		}
-		
-		delete [] _dyn;
-		delete [] _fld;
+        unsigned int i;
+        for(i = 0; i < _fldSize; i++){
+            tempf[i] = _fld[i];
+            tempd[i] = _dyn[i];
+        }
+        
+        delete [] _dyn;
+        delete [] _fld;
 
-		_fld = tempf;
-		_dyn = tempd;
-		_fldSize += C_DIALOG_EXPANSION_SIZE;
-	}
+        _fld = tempf;
+        _dyn = tempd;
+        _fldSize += C_DIALOG_EXPANSION_SIZE;
+    }
 
-	_fld[_fnum] = field;
-	_dyn[_fnum] = dynamic;
-	if(!_editable && field->editable())
-		_editable = true;
+    _fld[_fnum] = field;
+    _dyn[_fnum] = dynamic;
 
-	field->container();
+    (field->editable()) && (_editable = true);
 
-	return _fnum++;
+    field->container(this);
+
+    return _fnum++;
 }
 
 int CDialog::add(CField& field, bool dynamic){
-
-	return add(&field, dynamic);
+    return add(&field, dynamic);
 }
 
 CDialog& CDialog::operator<<(CField* field){
-	add(field);
-	return *this;
+    add(field);
+    return *this;
 }
 
 CDialog& CDialog::operator<<(CField& field){
-	add(field);
-	return *this;
+    add(field);
+    return *this;
+}
+
+bool CDialog::editable()const{ 
+    return _editable;
+}
+
+int CDialog::fieldNum()const{
+    return _fnum;
+}
+
+int CDialog::curIndex()const{
+    return _curidx;
+}
+ 
+CField& CDialog::operator[](unsigned int index){
+    return *_fld[index];
+}
+
+CField& CDialog::curField(){
+    return *_fld[_curidx];
 }

@@ -24,13 +24,10 @@
     <ClCompile Include="cfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="console.cpp">
+    <ClCompile Include="Test3DialogAndLineEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cdialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Test2DialogAndLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\20132notes\HeadersNobjects\vc\clabel.obj">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="..\..\20132notes\HeadersNobjects\vc\console.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="clineedit.obj">
+      <Filter>Resource Files</Filter>
     </Object>
   </ItemGroup>
 </Project>
