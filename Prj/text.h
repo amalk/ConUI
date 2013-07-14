@@ -38,7 +38,7 @@ namespace cui{
   class Text{
     Line** _data;
     unsigned int _size; // number of elements with or without data
-    unsigned int _textlines; // number of elelments with data
+    unsigned int _textlines; // number of elements with data
     void importString(const char* text);
     void initialize();
   public:
