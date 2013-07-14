@@ -56,4 +56,3 @@ int main(){
   console.pause();
   return 0;
 }
-
