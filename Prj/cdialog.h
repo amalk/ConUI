@@ -30,12 +30,12 @@ namespace cui{
     CDialog& operator<<(CField* field);
     CDialog& operator<<(CField& field);
  
-	bool editable()const{ return _editable;}
-	int fieldNum()const{ return _fnum;}
-	int curIndex()const{ return _curidx;}
+	bool editable()const;
+	int fieldNum()const;
+	int curIndex()const;
  
-	CField& operator[](unsigned int index){ return *_fld[index];}
-	CField& curField(){ return *_fld[_curidx];}
+	CField& operator[](unsigned int index);
+	CField& curField();
   };
 }
 
