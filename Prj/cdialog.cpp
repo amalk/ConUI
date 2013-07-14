@@ -60,29 +60,15 @@ int CDialog::edit(int fn){
 
     int key = 0;
 
+    draw(0);
+
     if(!_editable){
-        draw(0);
         key = console.getKey();
     }
     else{
         bool done = false;
         bool foundEditable;
-        int firstEditable;
-        int lastEditable;
         int i;
-
-
-        for(i = 0, foundEditable = false; i < _fnum && !foundEditable; i++)
-            (_fld[i]->editable()) && (foundEditable = true);
-
-        firstEditable = i - 1;
-
-
-        for(i = _fnum - 1, foundEditable = false; i >= 0 && !foundEditable; i--)
-            (_fld[i]->editable()) && (foundEditable = true);
-
-        lastEditable = i + 1;
-
 
         if(fn <= 0) {
             draw(fn);
@@ -91,38 +77,34 @@ int CDialog::edit(int fn){
         else
             _curidx = fn - 1;
 
-
-        for(foundEditable = false; _curidx < _fnum && !foundEditable; _curidx++)
+        for(++_curidx, foundEditable = false; !foundEditable; _curidx++){
+            (_curidx >= _fnum) && (_curidx = 0);
             (_fld[_curidx]->editable()) && (foundEditable = true);
+        }
 
         _curidx--;    // last iteration of the loop
-
-        !foundEditable && (_curidx = firstEditable);
 
         while(!done){
             key = _fld[_curidx]->edit();
             switch(key){
             case UP:
-                for(--_curidx, foundEditable = false; _curidx >= 0 && !foundEditable; _curidx--)
+                for(--_curidx, foundEditable = false; !foundEditable; _curidx--){
+                    (_curidx < 0) && (_curidx = _fnum - 1);
                     (_fld[_curidx]->editable()) && (foundEditable = true);
-                    
+                }
                 _curidx++;
-
-                (_curidx < firstEditable) && (_curidx = lastEditable);
                 break;
             case ENTER:
             case DOWN:
             case TAB:
-                for(++_curidx, foundEditable = false; _curidx < _fnum && !foundEditable; _curidx++)
+                for(++_curidx, foundEditable = false; !foundEditable; _curidx++){
+                    (_curidx >= _fnum) && (_curidx = 0);
                     (_fld[_curidx]->editable()) && (foundEditable = true);
-                    
+                }
                 _curidx--;
-
-                (_curidx > lastEditable) && (_curidx = firstEditable);
                 break;
             default:
                 done = true;
-                draw(0);
                 break;
             }   // switch
         }   // while
