@@ -20,7 +20,7 @@ namespace cui {
             _checkmarks[_cnt]->frame(this);
             
             if(_checkmarks[_cnt]->width() > this->width())
-                this->width(_checkmarks[_cnt]->width());
+                this->width(_checkmarks[_cnt]->width() + 2);
             
             this->height(_cnt+3);
             
@@ -98,7 +98,7 @@ namespace cui {
 
         for(i = 0; i < _cnt; i++)
             if(_checkmarks[i]->checked())
-                _flags += 1 << i;   // same as pow(2, i)
+                _flags += 1 << i;   // pow(2, i)
         
         return (void*)_flags;
     }
