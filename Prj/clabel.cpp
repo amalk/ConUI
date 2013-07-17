@@ -5,20 +5,19 @@ namespace cui{
     CLabel::CLabel(const CLabel& L) : CField(L.row(), L.col(), L.width(), L.height()){
         _data = new char[bio::strlen(L._data) + 1];
         bio::strcpy(_data, L._data);
-        visible(L.visible());
     }
 
     CLabel::CLabel(const char *Str, int Row, int Col, int Len) : CField(Row, Col){
         if(!Len) {
             _data = new char[bio::strlen(Str)+1];
             bio::strcpy((char*)_data, Str);
-            CFrame::width(bio::strlen(_data));
+            width(bio::strlen(_data));
         }
         else {
             _data = new char[Len+1];
             bio::strncpy((char*)_data, Str, Len);
             ((char*)_data)[Len] = 0;
-            CFrame::width(Len);
+            width(Len);
         }
     }
 

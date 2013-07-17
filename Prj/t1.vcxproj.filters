@@ -30,9 +30,6 @@
     <ClCompile Include="cfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cmenuitem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ccheckmark.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -98,6 +95,9 @@
       <Filter>Resource Files</Filter>
     </Object>
     <Object Include="vc\clineedit.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="vc\cmenuitem.obj">
       <Filter>Resource Files</Filter>
     </Object>
   </ItemGroup>
