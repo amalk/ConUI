@@ -12,7 +12,7 @@ namespace cui{
     MNode* _next;
     MNode* _prev;
     unsigned int _index;
-    MNode(CMenuItem* item,unsigned int index, MNode* prev, MNode* next = ((MNode*)0));
+    MNode(CMenuItem* item, unsigned int index, MNode* prev, MNode* next = ((MNode*)0));
     ~MNode(void);
     friend class CMenu;
   };
@@ -34,18 +34,18 @@ namespace cui{
   public:
     static const bool Select;
     CMenu(const char* Title, const char* Format, int Row, int Col, 
-              int Width, int Height,bool dropdown,  
-              const char* Border=C_BORDER_CHARS);
+              int Width, int Height, bool dropdown,
+              const char* Border = C_BORDER_CHARS);
     CMenu& add(const char* Text, bool selected = false);
     CMenu& operator<<(const char* Text);
     CMenu& operator<<(bool select);
     void draw(int fn = C_FULL_FRAME);
     int edit();
     void set(const void* data);
-    int selectedIndex();
+    int selectedIndex() const;
     int selectedIndex(int index);
     const char* selectedText();
-    bool editable()const;
+    bool editable() const;
     ~CMenu(void);
   };
   extern const bool Select;

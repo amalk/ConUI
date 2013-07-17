@@ -83,7 +83,6 @@
     <ClCompile Include="cframe.cpp" />
     <ClCompile Include="clabel.cpp" />
     <ClCompile Include="cmenu.cpp" />
-    <ClCompile Include="cmenuitem.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Test10Menu.cpp" />
   </ItemGroup>
@@ -104,6 +103,7 @@
     <Object Include="vc\cbutton.obj" />
     <Object Include="vc\cdialog.obj" />
     <Object Include="vc\clineedit.obj" />
+    <Object Include="vc\cmenuitem.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
