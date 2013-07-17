@@ -48,6 +48,9 @@
     <ClCompile Include="cveditline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="clineedit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -91,7 +94,7 @@
     <Object Include="vc\cdialog.obj">
       <Filter>Resource Files</Filter>
     </Object>
-    <Object Include="clineedit.obj">
+    <Object Include="vc\clineedit.obj">
       <Filter>Resource Files</Filter>
     </Object>
   </ItemGroup>
