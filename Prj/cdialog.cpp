@@ -59,7 +59,7 @@ int CDialog::edit(int fn){
 
     int key = 0;
 
-    draw(0);    // skip drawing frame
+    draw();
 
     if(!_editable){
         key = console.getKey();
