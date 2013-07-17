@@ -83,6 +83,9 @@
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
     <ClCompile Include="clabel.cpp" />
+    <ClCompile Include="clineedit.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="cmenuitem.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="cveditline.cpp" />
@@ -100,8 +103,10 @@
     <ClInclude Include="cveditline.h" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="clineedit.obj" />
     <Object Include="vc\cdialog.obj" />
+    <Object Include="vc\clineedit.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
