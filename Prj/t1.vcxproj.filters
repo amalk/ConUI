@@ -27,9 +27,6 @@
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cfield.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cmenuitem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,13 +45,16 @@
     <ClCompile Include="cdialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test8Text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ctext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cveditline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clineedit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,19 +71,10 @@
     <ClInclude Include="clabel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cfield.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cmenuitem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="clabel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cdialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cframe.h">
@@ -95,19 +86,22 @@
     <ClInclude Include="ccheckmark.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cbutton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="ctext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clineedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cveditline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="vc\clineedit.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
-    <Object Include="vc\clineedit.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
   </ItemGroup>
 </Project>

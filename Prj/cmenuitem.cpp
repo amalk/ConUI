@@ -25,7 +25,7 @@ namespace cui{
 			console.strdsp(&_format[1], absRow(), absCol()+bio::strlen((char*)_Label.data()) + 1, 1);
 		}
 		else{
-			console.strdsp(" ", absRow(), absCol() - 1);
+			console.strdsp(" ", absRow(), absCol());
 			console.strdsp(" ", absRow(), absCol()+bio::strlen((char*)_Label.data()) + 1);
 		}
 
