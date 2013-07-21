@@ -7,7 +7,7 @@ namespace cui{
 
     }
 
-    MNode::~MNode(){
+    MNode::~MNode() {
         if(_item)
             delete _item;
     }
@@ -25,7 +25,7 @@ namespace cui{
     }
 
     CMenu& CMenu::add(const char* Text, bool selected) {
-        MNode* newNode = new MNode(new CMenuItem(selected, _format, Text, 1, 1, (width() - 2)), (_cnt - 1), _tail, 0);
+        MNode* newNode = new MNode(new CMenuItem(selected, _format, Text, 1, 1, (width() - 2)), (_cnt - 1), _tail);
         
         if(_head == 0)
             _head = newNode;
@@ -44,7 +44,9 @@ namespace cui{
     }
 
     CMenu& CMenu::operator<<(bool select) {
-        // select && (_selectedIndex = _cnt - 1);
+        if(select)
+            _tail->_item->selected(true);
+
         return *this;
     }
 
@@ -53,12 +55,21 @@ namespace cui{
             _Title.draw();
 
         if(_dropped) {
+            CField::draw();
 
         }
     }
 
     int CMenu::edit() {
+        bool done = false;
+        int key;
 
+        while(!done){
+            draw();
+
+        }
+
+        return key;
     }
 
     void CMenu::set(const void* data) {
@@ -66,7 +77,7 @@ namespace cui{
     }
 
     int CMenu::selectedIndex() const {
-        
+        return _selectedIndex;
     }
 
     int CMenu::selectedIndex(int index) {
@@ -74,7 +85,18 @@ namespace cui{
     }
 
     const char* CMenu::selectedText() {
+        int selectedIdx = selectedIndex();
 
+        if(selectedIdx != -1) {
+            _cur = _head;
+
+            while(_cur->_index < selectedIdx && goNext())
+                ;
+
+            return _cur->_item->Text();
+        }
+
+        return 0;
     }
 
     bool CMenu::editable() const {
@@ -87,6 +109,28 @@ namespace cui{
             _head = _head -> _next;
             delete toDel;
         }
+    }
+
+    bool CMenu::goNext() {
+        bool rv = false;
+        
+        if(_cur != _tail) {
+            _cur = _cur->_next;
+            rv = true;
+        }
+
+        return rv;
+    }
+
+    bool CMenu::goPrev() {
+        bool rv = false;
+        
+        if(_cur != _head) {
+            _cur = _cur->_prev;
+            rv = true;
+        }
+
+        return rv;
     }
 
 }
