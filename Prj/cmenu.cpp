@@ -2,6 +2,8 @@
 
 namespace cui{
 
+    const bool CMenu::Select = false;
+
     MNode::MNode(CMenuItem* item, unsigned int index, MNode* prev, MNode* next) : 
         _item(item), _index(index), _prev(prev), _next(next) {
 
@@ -11,7 +13,7 @@ namespace cui{
         if(_item)
             delete _item;
     }
-        
+
     CMenu::CMenu(const char* Title, const char* Format, int Row, int Col, int Width, int Height, bool dropdown, const char* Border) : 
             _Title(Title, -1, 1, false),
             CField(Row + ((dropdown) ? 1 : 0), Col, Width, Height, 0, true, Border), _dropdown(dropdown), _dropped(false) {
@@ -44,8 +46,10 @@ namespace cui{
     }
 
     CMenu& CMenu::operator<<(bool select) {
-        if(select)
+        if(select) {
             _tail->_item->selected(true);
+            _selectedIndex = _tail->_index;
+        }
 
         return *this;
     }
@@ -54,13 +58,21 @@ namespace cui{
         if(_dropdown)
             _Title.draw();
 
-        if(_dropped) {
+        if(_dropped || !_dropdown) {
             CField::draw();
 
+            /*
+            int fieldHeight = CField::height() - 2;
+            int i = 0;
+            for(_cur = _first; i < 3; goNext(), i++)
+                _cur->_item->draw();
+            */
+            //_first->_item->draw();
         }
     }
 
     int CMenu::edit() {
+        /*
         bool done = false;
         int key;
 
@@ -70,13 +82,15 @@ namespace cui{
         }
 
         return key;
+        */
+        return 0;
     }
 
     void CMenu::set(const void* data) {
         _selectedIndex = *(int*)data;
     }
 
-    int CMenu::selectedIndex() const {
+    int CMenu::selectedIndex() {
         return _selectedIndex;
     }
 

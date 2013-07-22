@@ -1,9 +1,11 @@
-#ifndef __CIO__CMENU_H__
-#define __CIO__CMENU_H__
+#ifndef __CMENU_H__
+#define __CMENU_H__
+
 #include "cuigh.h"
 #include "cfield.h"
 #include "cmenuitem.h"
 #include "cbutton.h"
+
 namespace cui{
   class Cmenu;
 
@@ -42,12 +44,13 @@ namespace cui{
     void draw(int fn = C_FULL_FRAME);
     int edit();
     void set(const void* data);
-    int selectedIndex() const;
+    int selectedIndex();
     int selectedIndex(int index);
     const char* selectedText();
     bool editable() const;
     ~CMenu(void);
   };
+
   extern const bool Select;
 }
 

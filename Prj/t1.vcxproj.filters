@@ -27,13 +27,7 @@
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cmenuitem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ccheckmark.cpp">
-        <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cbutton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="clabel.cpp">
@@ -42,13 +36,7 @@
     <ClCompile Include="Test10Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cmenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cchecklist.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cdialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="text.cpp">
@@ -61,6 +49,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="clineedit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmenuitem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,5 +113,13 @@
     <ClInclude Include="cmenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="vc\cbutton.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="vc\cdialog.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
   </ItemGroup>
 </Project>
