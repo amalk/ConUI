@@ -1,9 +1,9 @@
-#ifndef __FS_CHECKLIST_H__
-#define __FS_CHECKLIST_H__
+#ifndef __CHECKLIST_H__
+#define __CHECKLIST_H__
 
-#pragma once
 #include "cfield.h"
 #include "ccheckmark.h"
+
 namespace cui{
 
   class CCheckList : public CField{
@@ -15,15 +15,13 @@ namespace cui{
     unsigned int _cur;
     void destruct();
   public:
-    CCheckList(const char* Format, int Row, int Col, int Width,bool radio, bool Bordered = true,const char* Border=C_BORDER_CHARS);
-//    CCheckList(const CCheckList& CC);
+    CCheckList(const char* Format, int Row, int Col, int Width, bool radio, bool Bordered = true, const char* Border = C_BORDER_CHARS);
     ~CCheckList(void);
-//    CCheckList& operator=(const CCheckList& CC);
     CCheckList& add(const char* Text, bool selected = false);
     CCheckList& operator<<(const char* Text);
     void draw(int fn = C_FULL_FRAME);
     int edit();
-    void* data()const;
+    void* data();
     void set(const void* data);
     CCheckMark& operator[](unsigned int index);
     bool editable()const;
@@ -35,7 +33,7 @@ namespace cui{
     void selectedIndex(unsigned int index);
     unsigned int length();
   };
-  
+
 }
 
 #endif
