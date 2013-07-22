@@ -1,7 +1,8 @@
-#pragma once
 #ifndef __CLINEEDIT_H__
 #define __CLINEEDIT_H__
+
 #include "cfield.h"
+
 namespace cui{
   class CLineEdit: public CField{
     bool _dyn;

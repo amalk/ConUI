@@ -78,17 +78,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bconsole.cpp" />
+    <ClCompile Include="cbutton.cpp" />
+    <ClCompile Include="cchecklist.cpp" />
     <ClCompile Include="ccheckmark.cpp" />
+    <ClCompile Include="cdialog.cpp" />
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
     <ClCompile Include="clabel.cpp" />
     <ClCompile Include="cmenu.cpp" />
-    <ClCompile Include="console.cpp" />
     <ClCompile Include="Test10Menu.cpp" />
+    <ClCompile Include="clineedit.cpp" />
+    <ClCompile Include="cmenuitem.cpp" />
+    <ClCompile Include="console.cpp" />
+    <ClCompile Include="ctext.cpp" />
+    <ClCompile Include="text.cpp" />
+    <ClCompile Include="cveditline.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bconsole.h" />
     <ClInclude Include="cbutton.h" />
+    <ClInclude Include="cchecklist.h" />
+    <ClInclude Include="ccheckmark.h" />
     <ClInclude Include="cdialog.h" />
     <ClInclude Include="cfield.h" />
     <ClInclude Include="cframe.h" />
@@ -97,13 +107,10 @@
     <ClInclude Include="cmenu.h" />
     <ClInclude Include="cmenuitem.h" />
     <ClInclude Include="console.h" />
+    <ClInclude Include="ctext.h" />
+    <ClInclude Include="text.h" />
+    <ClInclude Include="cveditline.h" />
     <ClInclude Include="cuigh.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="vc\cbutton.obj" />
-    <Object Include="vc\cdialog.obj" />
-    <Object Include="vc\clineedit.obj" />
-    <Object Include="vc\cmenuitem.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
