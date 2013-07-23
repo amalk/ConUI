@@ -2,7 +2,7 @@
 
 namespace cui{
 
-    const bool CMenu::Select = false;
+    const bool CMenu::Select = true;
 
     MNode::MNode(CMenuItem* item, unsigned int index, MNode* prev, MNode* next) : 
         _item(item), _index(index), _prev(prev), _next(next) {
@@ -18,7 +18,7 @@ namespace cui{
             _Title(Title, -1, 1, false),
             CField(Row + ((dropdown) ? 1 : 0), Col, Width, Height, 0, true, Border), _dropdown(dropdown), _dropped(false) {
         
-        _head = _tail = _cur = 0;
+        _first = _head = _tail = _cur = 0;
         _cnt = 0;
         _selectedIndex = -1;
         _data = &_selectedIndex;
@@ -29,8 +29,10 @@ namespace cui{
     CMenu& CMenu::add(const char* Text, bool selected) {
         MNode* newNode = new MNode(new CMenuItem(selected, _format, Text, 1, 1, (width() - 2)), (_cnt - 1), _tail);
         
+        newNode->_item->frame(this);
+
         if(_head == 0)
-            _head = newNode;
+            _cur = _first = _head = newNode;
         else
             _tail->_next = newNode;
 
@@ -60,30 +62,102 @@ namespace cui{
 
         if(_dropped || !_dropdown) {
             CField::draw();
-
-            /*
+			           
             int fieldHeight = CField::height() - 2;
-            int i = 0;
-            for(_cur = _first; i < 3; goNext(), i++)
-                _cur->_item->draw();
-            */
-            //_first->_item->draw();
+            int i;
+            MNode* temp = _first;
+            for(i=0; i < fieldHeight; i++){
+                temp->_item->draw();
+				//row(row()+1);
+                temp = temp->_next;
+			}
+            
+            //row(row()-fieldHeight);
+		}
+        if(_dropdown && !_dropped) {
+            CFrame::draw(0);
         }
     }
 
     int CMenu::edit() {
-        /*
-        bool done = false;
-        int key;
-
+        
+        int key = 0;
+        int i;
+		bool done = false;
+        bool browse = false;
+		
         while(!done){
             draw();
+            if(_dropdown && !_dropped){
+                if(_Title.edit() == C_BUTTON_HIT){
+                    _dropped = true;
+                    browse = true;
+                    draw();
+                }
+            }
+            done = true;
+            while(browse){
+                key = _cur->_item->edit();
 
+                switch(key){
+                case ENTER:
+                    if(_selectedIndex == -1){
+                        browse = false;
+                        break;
+                    }
+                case SPACE:
+                    _cur->_item->selected(true);
+                    _selectedIndex = _cur->_index;
+                    browse = false;
+                    break;
+                case DOWN:
+                    if(goNext()){
+                        if(_cur->_index == height() - 3){
+                            _first = _first->_next;
+                        }
+                        draw();
+                    }
+                    else{
+                        if(_dropdown){
+                            _cur = _first = _head;
+                            draw();
+                        }
+                        else {
+                            browse = false;
+                        }
+                    }
+                    break;
+                case UP:
+                    if(!goPrev()){
+                        if(_dropdown){
+                            _cur = _tail;
+                            int z = _cnt - height() - 2;
+                            for(i = 0; i < z; i++){
+                                _first = _first->_next;
+                            }
+                        }
+                        else {
+                            browse = false;
+                        }
+                    }
+                    else{
+                        _first = _first->_prev;
+                        draw();
+                    }
+                    break;
+                case ESCAPE:
+                    _dropped = false;
+                    done = false;
+                default:
+                    browse = false;
+                    break;
+                }   //switch
+            }   //browsing loop
+        }   //editing loop
+        if(_dropdown){
+            _dropped = false;
         }
-
         return key;
-        */
-        return 0;
     }
 
     void CMenu::set(const void* data) {

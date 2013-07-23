@@ -75,7 +75,7 @@ int CDialog::edit(int fn){
         else
             _curidx = fn - 1;
 
-        for(++_curidx, foundEditable = false; !foundEditable; _curidx++){
+        for(foundEditable = false; !foundEditable; _curidx++){
             (_curidx >= _fnum) && (_curidx = 0);
             (_fld[_curidx]->editable()) && (foundEditable = true);
         }

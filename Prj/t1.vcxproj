@@ -81,11 +81,10 @@
     <ClCompile Include="cbutton.cpp" />
     <ClCompile Include="cchecklist.cpp" />
     <ClCompile Include="ccheckmark.cpp" />
-    <ClCompile Include="cdialog.cpp" />
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
     <ClCompile Include="clabel.cpp" />
-    <ClCompile Include="clineedit.cpp" />
+    <ClCompile Include="cmenu.cpp" />
     <ClCompile Include="cmenuitem.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="ctext.cpp" />
@@ -112,7 +111,8 @@
     <ClInclude Include="cuigh.h" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="vc\cmenu.obj" />
+    <Object Include="vc\cdialog.obj" />
+    <Object Include="vc\clineedit.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
