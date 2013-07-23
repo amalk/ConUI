@@ -21,9 +21,6 @@
     <ClCompile Include="cframe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cfield.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -31,9 +28,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="clabel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Test10Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cchecklist.cpp">
@@ -54,7 +48,16 @@
     <ClCompile Include="cmenuitem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cmenu.cpp">
+    <ClCompile Include="cfield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cbutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test10Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cdialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -115,10 +118,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="vc\cbutton.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
-    <Object Include="vc\cdialog.obj">
+    <Object Include="vc\cmenu.obj">
       <Filter>Resource Files</Filter>
     </Object>
   </ItemGroup>

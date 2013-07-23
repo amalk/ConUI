@@ -19,19 +19,18 @@ namespace cui{
     void CButton::draw(int fn){
         CFrame::draw(fn);
 
-        if(CField::visible())
-            console.strdsp((const char*)_data, absRow()+1, absCol()+2, 0, 0);
-        else
-            console.strdsp((const char*)_data, absRow(), absCol()+1, 0, 0);
+        console.strdsp(" ", absRow()+(visible()?1:0), absCol()+bio::strlen(_data)+(visible()?2:0));
+        console.strdsp(" ", absRow()+(visible()?1:0), absCol()+(visible()?1:-1), 0, 1);
+        console.strdsp((const char*)_data, absRow()+(visible()?1:0), absCol()+(visible()?2:0), 0, 0);
     }
     
     int CButton::edit(){
-        draw();
-        console.strdsp("]", absRow()+1, absCol()+bio::strlen(_data)+2);
-        console.strdsp("[", absRow()+1, absCol()+1);
+        console.strdsp("]", absRow()+(visible()?1:0), absCol()+bio::strlen(_data)+(visible()?2:0));
+        console.strdsp("[", absRow()+(visible()?1:0), absCol()+(visible()?1:-1));
+
         int key = console.getKey();
-        console.strdsp(" ", absRow()+1, absCol()+bio::strlen(_data)+2);
-        console.strdsp(" ", absRow()+1, absCol()+1, 0, 1);
+        draw();
+        
         return (key == ENTER || key == SPACE) ? C_BUTTON_HIT : key;
     }
 
