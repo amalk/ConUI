@@ -81,6 +81,7 @@ namespace cui{
     int CMenu::edit() {
         int key = 0;
         int i;
+        MNode* temp;
         bool doneEditing = false;
         bool doneBrowsing = false;
         
@@ -88,13 +89,22 @@ namespace cui{
             draw();
             if(_dropdown && !_dropped){
                 key = _Title.edit();
-                if(key == C_BUTTON_HIT){
+                switch(key) {
+                case C_BUTTON_HIT:
                     _dropped = true;
                     doneBrowsing = false;
                     draw();
-                }
-                else
+                    break;
+                case LEFT:
+                    key = UP;
                     doneBrowsing = true;
+                    break;
+                case RIGHT: //fallthrough
+                    key = DOWN;
+                default:
+                    doneBrowsing = true;
+                    break;
+                }
             }
             else if(!_dropdown)
                 doneBrowsing = false;
@@ -110,9 +120,14 @@ namespace cui{
                         break;
                     }
                 case SPACE:
+                    for(i = 0, temp = _head; i < _cnt; i++){
+                        temp->_item->selected(false);
+                        temp = temp->_next;
+                    }
                     _cur->_item->selected(true);
                     _selectedIndex = _cur->_index;
                     doneBrowsing = true;
+                    draw();
                     break;
                 case DOWN:
                     if(goNext()){
@@ -147,9 +162,8 @@ namespace cui{
                             }
                             draw();
                         }
-                        else {
+                        else
                             doneBrowsing = true;
-                        }
                     }
                     break;
                 case ESCAPE:
