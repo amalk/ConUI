@@ -29,8 +29,8 @@ namespace cui{
     void radio(bool val);
     unsigned int flags();
     void flags(unsigned int theFlags);
-    unsigned int selectedIndex()const;
-    void selectedIndex(unsigned int index);
+    int selectedIndex()const;
+    void selectedIndex(int index);
     unsigned int length();
   };
 

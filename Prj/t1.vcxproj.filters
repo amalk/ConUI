@@ -36,9 +36,6 @@
     <ClCompile Include="text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ctext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cveditline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,13 +45,13 @@
     <ClCompile Include="cfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cbutton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Test10Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cmenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cbutton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

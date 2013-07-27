@@ -144,7 +144,7 @@ namespace cui {
         _flags = theFlags;
     }
 
-    unsigned int CCheckList::selectedIndex()const {
+    int CCheckList::selectedIndex()const {
         unsigned int i;
         for(i = 0; i < _cnt; i++)
             if(_checkmarks[i]->checked())
@@ -153,7 +153,7 @@ namespace cui {
         return -1;
     }
 
-    void CCheckList::selectedIndex(unsigned int index) {
+    void CCheckList::selectedIndex(int index) {
         if(_radio || index < 0) {
             unsigned int i;
             for(i = 0; i < _cnt; i++)

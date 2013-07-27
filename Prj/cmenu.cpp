@@ -40,6 +40,8 @@ namespace cui{
 
         _cnt++;
 
+        selected && (_selectedIndex = newNode->_index);
+
         return *this;
     }
 
@@ -62,100 +64,108 @@ namespace cui{
 
         if(_dropped || !_dropdown) {
             CField::draw();
-			           
+                       
             int fieldHeight = CField::height() - 2;
             int i;
             MNode* temp = _first;
+
             for(i=0; i < fieldHeight; i++){
                 temp->_item->draw();
-				//row(row()+1);
+                row(row()+1);
                 temp = temp->_next;
-			}
+            }
             
-            //row(row()-fieldHeight);
-		}
-        if(_dropdown && !_dropped) {
-            CFrame::draw(0);
+            row(row()-fieldHeight);
         }
     }
 
     int CMenu::edit() {
-        
         int key = 0;
         int i;
-		bool done = false;
-        bool browse = false;
-		
-        while(!done){
+        bool doneEditing = false;
+        bool doneBrowsing = false;
+        
+        while(!doneEditing){
             draw();
             if(_dropdown && !_dropped){
-                if(_Title.edit() == C_BUTTON_HIT){
+                key = _Title.edit();
+                if(key == C_BUTTON_HIT){
                     _dropped = true;
-                    browse = true;
+                    doneBrowsing = false;
                     draw();
                 }
+                else
+                    doneBrowsing = true;
             }
-            done = true;
-            while(browse){
+            else if(!_dropdown)
+                doneBrowsing = false;
+
+            doneEditing = true;
+            while(!doneBrowsing){
                 key = _cur->_item->edit();
 
                 switch(key){
                 case ENTER:
                     if(_selectedIndex == -1){
-                        browse = false;
+                        doneBrowsing = true;
                         break;
                     }
                 case SPACE:
                     _cur->_item->selected(true);
                     _selectedIndex = _cur->_index;
-                    browse = false;
+                    doneBrowsing = true;
                     break;
                 case DOWN:
                     if(goNext()){
-                        if(_cur->_index == height() - 3){
+                        if(_cur->_index == height() - 2){
                             _first = _first->_next;
                         }
-                        draw();
+                        //draw();
                     }
                     else{
                         if(_dropdown){
                             _cur = _first = _head;
-                            draw();
+                            //draw();
                         }
                         else {
-                            browse = false;
+                            doneBrowsing = true;
                         }
                     }
                     break;
                 case UP:
-                    if(!goPrev()){
+                    if(goPrev()){
+                        if(_cur->_index < _first->_index){
+                            _first = _first->_prev;
+                            //draw();
+                        }
+                    }
+                    else{
                         if(_dropdown){
                             _cur = _tail;
                             int z = _cnt - height() - 2;
                             for(i = 0; i < z; i++){
                                 _first = _first->_next;
                             }
+                            //draw();
                         }
                         else {
-                            browse = false;
+                            doneBrowsing = true;
                         }
-                    }
-                    else{
-                        _first = _first->_prev;
-                        draw();
                     }
                     break;
                 case ESCAPE:
                     _dropped = false;
-                    done = false;
+                    doneEditing = false;
                 default:
-                    browse = false;
+                    doneBrowsing = true;
                     break;
-                }   //switch
-            }   //browsing loop
-        }   //editing loop
+                }   // switch
+            }   // browsing loop
+        }   // editing loop
+
         if(_dropdown){
             _dropped = false;
+            draw();
         }
         return key;
     }
