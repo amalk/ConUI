@@ -71,10 +71,7 @@ namespace cui{
             MNode* temp = _first;
 
             for(i=0; i < fieldHeight; i++){
-                if(_dropdown)
-                    temp->_item->row(row() + i);
-                else
-                    temp->_item->row(1 + i);
+                temp->_item->row((_dropdown ? row() : 1) + i);  //use row if the dropdown is true, otherwise use 1
                 temp->_item->draw();
                 temp = temp->_next;
             }
@@ -119,7 +116,7 @@ namespace cui{
                     break;
                 case DOWN:
                     if(goNext()){
-                        if(_cur->_index >= height() - 2){
+                        if(_cur->_index - _first->_index == height() - 2){
                             _first = _first->_next;
                            draw();
                         }
@@ -144,7 +141,7 @@ namespace cui{
                     else{
                         if(_dropdown){
                             _cur = _tail;
-                            int z = _cnt - height() - 2;
+                            int z = _cnt - height() + 2;
                             for(i = 0; i < z; i++){
                                 _first = _first->_next;
                             }
