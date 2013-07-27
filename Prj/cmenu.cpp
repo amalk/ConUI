@@ -27,7 +27,7 @@ namespace cui{
     }
 
     CMenu& CMenu::add(const char* Text, bool selected) {
-        MNode* newNode = new MNode(new CMenuItem(selected, _format, Text, 1, 1, (width() - 2)), (_cnt - 1), _tail);
+        MNode* newNode = new MNode(new CMenuItem(selected, _format, Text, 1, 1, (width() - 2)), _cnt, _tail);
         
         newNode->_item->frame(this);
 
@@ -59,23 +59,25 @@ namespace cui{
     }
 
     void CMenu::draw(int fn) {
+                
         if(_dropdown)
             _Title.draw();
 
         if(_dropped || !_dropdown) {
             CField::draw();
                        
-            int fieldHeight = CField::height() - 2;
+            int fieldHeight = height() - 2;
             int i;
             MNode* temp = _first;
 
             for(i=0; i < fieldHeight; i++){
+                if(_dropdown)
+                    temp->_item->row(row() + i);
+                else
+                    temp->_item->row(1 + i);
                 temp->_item->draw();
-                row(row()+1);
                 temp = temp->_next;
             }
-            
-            row(row()-fieldHeight);
         }
     }
 
@@ -117,15 +119,15 @@ namespace cui{
                     break;
                 case DOWN:
                     if(goNext()){
-                        if(_cur->_index == height() - 2){
+                        if(_cur->_index >= height() - 2){
                             _first = _first->_next;
+                           draw();
                         }
-                        //draw();
                     }
                     else{
                         if(_dropdown){
                             _cur = _first = _head;
-                            //draw();
+                            draw();
                         }
                         else {
                             doneBrowsing = true;
@@ -136,7 +138,7 @@ namespace cui{
                     if(goPrev()){
                         if(_cur->_index < _first->_index){
                             _first = _first->_prev;
-                            //draw();
+                            draw();
                         }
                     }
                     else{
@@ -146,7 +148,7 @@ namespace cui{
                             for(i = 0; i < z; i++){
                                 _first = _first->_next;
                             }
-                            //draw();
+                            draw();
                         }
                         else {
                             doneBrowsing = true;
@@ -155,7 +157,7 @@ namespace cui{
                     break;
                 case ESCAPE:
                     _dropped = false;
-                    doneEditing = false;
+                    doneEditing = _dropdown ? false : true;
                 default:
                     doneBrowsing = true;
                     break;
