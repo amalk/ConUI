@@ -81,7 +81,6 @@
     <ClCompile Include="cbutton.cpp" />
     <ClCompile Include="cchecklist.cpp" />
     <ClCompile Include="ccheckmark.cpp" />
-    <ClCompile Include="cdialog.cpp" />
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
     <ClCompile Include="clabel.cpp" />
@@ -110,6 +109,9 @@
     <ClInclude Include="text.h" />
     <ClInclude Include="cveditline.h" />
     <ClInclude Include="cuigh.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="vc\cdialog.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
