@@ -79,7 +79,7 @@ void CMenu::draw(int fn)
     if(_dropped || !_dropdown)
     {
         CField::draw(fn);
-        int fieldHeight = height() - 2;
+        int fieldHeight = (_cnt < height() - 2) ? _cnt : height() - 2;
         int i;
         MNode* temp = _first;
 
