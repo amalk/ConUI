@@ -54,6 +54,9 @@
     <ClCompile Include="cmenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -112,9 +115,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="vc\cdialog.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
     <Object Include="vc\clineedit.obj">
       <Filter>Resource Files</Filter>
     </Object>
