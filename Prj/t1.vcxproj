@@ -85,6 +85,7 @@
     <ClCompile Include="cfield.cpp" />
     <ClCompile Include="cframe.cpp" />
     <ClCompile Include="clabel.cpp" />
+    <ClCompile Include="clineedit.cpp" />
     <ClCompile Include="cmenu.cpp" />
     <ClCompile Include="cmenuitem.cpp" />
     <ClCompile Include="console.cpp" />
@@ -109,9 +110,6 @@
     <ClInclude Include="text.h" />
     <ClInclude Include="cveditline.h" />
     <ClInclude Include="cuigh.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="vc\clineedit.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
