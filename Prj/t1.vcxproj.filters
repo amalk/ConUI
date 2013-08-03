@@ -57,6 +57,9 @@
     <ClCompile Include="cmenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -113,8 +116,5 @@
     <ClInclude Include="cmenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="vc\cdialog.obj" />
   </ItemGroup>
 </Project>

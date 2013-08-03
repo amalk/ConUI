@@ -102,6 +102,10 @@ int CDialog::edit(int fn)
 
             switch(key)
             {
+            case LEFT:
+            case RIGHT:
+                break;
+
             case UP:
                 for(--_curidx, foundEditable = false; !foundEditable; _curidx--)
                 {
@@ -111,7 +115,7 @@ int CDialog::edit(int fn)
 
                 _curidx++;
                 break;
-
+            
             case ENTER:
             case DOWN:
             case TAB:
