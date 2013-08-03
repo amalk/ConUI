@@ -173,6 +173,10 @@ namespace cui{
                     break;
                 }   // switch
             }   // browsing loop
+
+            if(_dropdown)
+                hide();
+
         }   // editing loop
 
         if(_dropdown){
