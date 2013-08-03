@@ -48,10 +48,10 @@
     <ClCompile Include="Test10Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cmenu.cpp">
+    <ClCompile Include="cbutton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cbutton.cpp">
+    <ClCompile Include="cmenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

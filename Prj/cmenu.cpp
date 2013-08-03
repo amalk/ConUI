@@ -64,7 +64,7 @@ namespace cui{
             _Title.draw();
 
         if(_dropped || !_dropdown) {
-            CField::draw();
+            CField::draw(fn);
                        
             int fieldHeight = height() - 2;
             int i;
@@ -115,10 +115,9 @@ namespace cui{
 
                 switch(key){
                 case ENTER:
-                    if(_selectedIndex == -1){
-                        doneBrowsing = true;
-                        break;
-                    }
+                    (_selectedIndex != -1) && (key = SPACE);
+                    doneBrowsing = true;
+                    break;
                 case SPACE:
                     for(i = 0, temp = _head; i < _cnt; i++){
                         temp->_item->selected(false);
