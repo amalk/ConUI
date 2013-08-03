@@ -1,76 +1,98 @@
 #include "ccheckmark.h"
 
-namespace cui {
+namespace cui
+{
 
-    CCheckMark::CCheckMark(bool Checked, const char* Format, const char* Text, int Row, int Col, int Width, bool IsRadio)
-        : CField(Row, Col, Width, 1), _Label(Text, 0, 4, Width-4) {
-            _Label.frame(this);
-            _flag = Checked;
-            _radio = IsRadio;
-            bio::strcpy(_format, Format);
-            _data = &_flag;
+CCheckMark::CCheckMark(bool Checked, const char* Format, const char* Text, int Row, int Col,
+                       int Width, bool IsRadio)
+    : CField(Row, Col, Width, 1), _Label(Text, 0, 4, Width - 4)
+{
+    _Label.frame(this);
+    _flag = Checked;
+    _radio = IsRadio;
+    bio::strcpy(_format, Format);
+    _data = &_flag;
+}
+
+CCheckMark::CCheckMark(const CCheckMark& C) : CField(C), _Label(C._Label)
+{
+    this->_flag = C._flag;
+    this->_radio = C._radio;
+    bio::strcpy(this->_format, C._format);
+    _data = &_flag;
+}
+
+void CCheckMark::draw(int fn)
+{
+    console.strdsp(_format, absRow(), absCol());
+
+    if(!_flag)
+    {
+        console.strdsp(" ", absRow(), absCol() + 1);
     }
 
-    CCheckMark::CCheckMark(const CCheckMark& C) : CField(C), _Label(C._Label) {
-        this->_flag = C._flag;
-        this->_radio = C._radio;
-        bio::strcpy(this->_format, C._format);
-        _data = &_flag;
-    }
+    _Label.draw();
+    console.setPos(absRow(), absCol() + 1);
+}
 
-    void CCheckMark::draw(int fn) {
-        console.strdsp(_format, absRow(), absCol());
-        if(!_flag)
-            console.strdsp(" ", absRow(), absCol()+1);
-        _Label.draw();
-        console.setPos(absRow(), absCol()+1);
-    }
+int CCheckMark::edit()
+{
+    draw();
+    int key = console.getKey();
 
-    int CCheckMark::edit() {
+    if(key == SPACE)
+    {
+        _radio&&  (_flag = true);
+        !_radio&&  (_flag = !_flag);
         draw();
-        int key = console.getKey();
-        if(key == SPACE) {
-            _radio && (_flag = true);
-            !_radio && (_flag = !_flag);
-            draw();
-        }
-        return key;
     }
 
-    bool CCheckMark::editable()const {
-        return true;
-    }
+    return key;
+}
 
-    void CCheckMark::set(const void* flag) {
-        _flag = *(bool*)flag;
-    }
+bool CCheckMark::editable()const
+{
+    return true;
+}
 
-    bool CCheckMark::checked()const {
-        return _flag;
-    }
+void CCheckMark::set(const void* flag)
+{
+    _flag = *(bool*)flag;
+}
 
-    void CCheckMark::checked(bool val) {
-        _flag = val;
-    }
+bool CCheckMark::checked()const
+{
+    return _flag;
+}
 
-    bool CCheckMark::radio() {
-        return _radio;
-    }
+void CCheckMark::checked(bool val)
+{
+    _flag = val;
+}
 
-    void CCheckMark::radio(bool isRadio) {
-        _radio = isRadio;
-    }
+bool CCheckMark::radio()
+{
+    return _radio;
+}
 
-    CCheckMark::operator bool() {
-        return _flag;
-    }
+void CCheckMark::radio(bool isRadio)
+{
+    _radio = isRadio;
+}
 
-    CCheckMark::operator char*() {
-        return (char*)_Label.data();
-    }
+CCheckMark::operator bool()
+{
+    return _flag;
+}
 
-    bool CCheckMark::operator=(bool flag) {
-        return _flag = flag;
-    }
+CCheckMark::operator char* ()
+{
+    return (char*)_Label.data();
+}
+
+bool CCheckMark::operator=(bool flag)
+{
+    return _flag = flag;
+}
 
 }

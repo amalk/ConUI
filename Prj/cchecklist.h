@@ -4,9 +4,11 @@
 #include "cfield.h"
 #include "ccheckmark.h"
 
-namespace cui{
+namespace cui
+{
 
-  class CCheckList : public CField{
+class CCheckList : public CField
+{
     CCheckMark* _checkmarks[32];
     bool _radio;
     char _format[4];
@@ -14,8 +16,9 @@ namespace cui{
     unsigned int _flags;
     unsigned int _cur;
     void destruct();
-  public:
-    CCheckList(const char* Format, int Row, int Col, int Width, bool radio, bool Bordered = true, const char* Border = C_BORDER_CHARS);
+public:
+    CCheckList(const char* Format, int Row, int Col, int Width, bool radio, bool Bordered = true,
+               const char* Border = C_BORDER_CHARS);
     ~CCheckList(void);
     CCheckList& add(const char* Text, bool selected = false);
     CCheckList& operator<<(const char* Text);
@@ -32,7 +35,7 @@ namespace cui{
     int selectedIndex()const;
     void selectedIndex(int index);
     unsigned int length();
-  };
+};
 
 }
 
