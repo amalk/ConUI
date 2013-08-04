@@ -89,6 +89,7 @@
     <ClCompile Include="cmenu.cpp" />
     <ClCompile Include="cmenuitem.cpp" />
     <ClCompile Include="console.cpp" />
+    <ClCompile Include="ctext.cpp" />
     <ClCompile Include="Test10Menu.cpp" />
     <ClCompile Include="text.cpp" />
     <ClCompile Include="cveditline.cpp" />
