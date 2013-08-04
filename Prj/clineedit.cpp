@@ -4,9 +4,8 @@ namespace cui
 {
 
 CLineEdit::CLineEdit(char* Str, int Row, int Col, int Width,
-                     int Maxdatalen, bool* Insertmode,
-                     bool Bordered,
-                     const char* Border): CField(Row, Col,  Width, (Bordered) ? 3 : 1, Str, Bordered, Border)
+                     int Maxdatalen, bool* Insertmode, bool Bordered, const char* Border) 
+                     : CField(Row, Col,  Width, (Bordered) ? 3 : 1, Str, Bordered, Border)
 {
     _dyn = false;
     _data = Str;
@@ -15,10 +14,9 @@ CLineEdit::CLineEdit(char* Str, int Row, int Col, int Width,
     _curpos = _offset = 0;
 }
 
-CLineEdit::CLineEdit(int Row, int Col, int Width,
-                     int Maxdatalen, bool* Insertmode,
-                     bool Bordered,
-                     const char* Border): CField(Row, Col,  Width, (Bordered) ? 3 : 1, 0, Bordered, Border)
+CLineEdit::CLineEdit(int Row, int Col, int Width, int Maxdatalen,
+                     bool* Insertmode, bool Bordered, const char* Border)
+                     : CField(Row, Col,  Width, (Bordered) ? 3 : 1, 0, Bordered, Border)
 {
     _data = new char[Maxdatalen + 1]();
     _dyn = true;
@@ -57,7 +55,6 @@ bool CLineEdit::editable()const
 void CLineEdit::set(const void* Str)
 {
     bio::strncpy(_data, Str, _maxdatalen);
-    CFrame::width(bio::strlen(_data));
 }
 
 }
