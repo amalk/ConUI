@@ -12,7 +12,7 @@ CLineEdit::CLineEdit(char* Str, int Row, int Col, int Width,
     _data = Str;
     _maxdatalen = Maxdatalen;
     _insertmode = Insertmode;
-    _curpos = _offset =  0;
+    _curpos = _offset = 0;
 }
 
 CLineEdit::CLineEdit(int Row, int Col, int Width,
@@ -24,7 +24,7 @@ CLineEdit::CLineEdit(int Row, int Col, int Width,
     _dyn = true;
     _maxdatalen = Maxdatalen;
     _insertmode = Insertmode;
-    _curpos = _offset =  0 ;
+    _curpos = _offset = 0;
 }
 
 CLineEdit::~CLineEdit()
@@ -38,7 +38,7 @@ CLineEdit::~CLineEdit()
 void CLineEdit::draw(int Refresh)
 {
     CFrame::draw(Refresh);
-    console.strdsp((const char*)_data, absRow() + ((visible()) ? 1 : 0),
+    console.strdsp((const char*)_data + _offset, absRow() + ((visible()) ? 1 : 0),
                    absCol() + ((visible()) ? 1 : 0), width() - ((visible()) ? 2 : 0));
 }
 

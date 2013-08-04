@@ -6,7 +6,9 @@
 
 namespace cui
 {
+
 class CField;
+
 class CDialog: public CFrame
 {
 private:
@@ -36,6 +38,7 @@ public:
     CField& operator[](unsigned int index);
     CField& curField();
 };
+
 }
 
 #endif

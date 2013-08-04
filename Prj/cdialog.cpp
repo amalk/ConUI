@@ -1,6 +1,7 @@
 #include "cdialog.h"
 
-using namespace cui;
+namespace cui
+{
 
 CDialog::CDialog(CFrame* Container, int Row, int Col, int Width, int Height,
                  bool Bordered, const char* Border)
@@ -206,4 +207,6 @@ CField& CDialog::operator[](unsigned int index)
 CField& CDialog::curField()
 {
     return *_fld[_curidx];
+}
+
 }
