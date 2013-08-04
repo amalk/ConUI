@@ -151,42 +151,46 @@ int Console::stredit(char* str, int row, int col, int fieldLength,
                 break;
 
             case BACKSPACE:
-                if((*curPosition >= 0 && *strOffset + *curPosition != 0) || (*curPosition == 1 && *strOffset == 0))
+                if(!ReadOnly)
                 {
-                    for(i = -1; str[*strOffset + *curPosition + i]; i++)
+                    if((*curPosition >= 0 && *strOffset + *curPosition != 0) || (*curPosition == 1 && *strOffset == 0))
                     {
-                        str[*strOffset + *curPosition + i] = str[*strOffset + *curPosition + 1 + i];
+                        for(i = -1; str[*strOffset + *curPosition + i]; i++)
+                        {
+                            str[*strOffset + *curPosition + i] = str[*strOffset + *curPosition + 1 + i];
+                        }
+
+                        (*curPosition)--;
                     }
 
-                    (*curPosition)--;
-                }
-
-                if(*curPosition < 1)
-                {
-                    if(fieldLength <= _tabsize && *strOffset > 0)
+                    if(*curPosition < 1)
                     {
-                        *curPosition = fieldLength - 1;
-                        *strOffset -= fieldLength;
-                    }
-                    else if(*strOffset >= _tabsize)
-                    {
-                        *strOffset -= _tabsize;
-                        *curPosition += _tabsize;
-                    }
-                    else
-                    {
-                        *curPosition += *strOffset;
-                        *strOffset = 0;
+                        if(fieldLength <= _tabsize && *strOffset > 0)
+                        {
+                            *curPosition = fieldLength - 1;
+                            *strOffset -= fieldLength;
+                        }
+                        else if(*strOffset >= _tabsize)
+                        {
+                            *strOffset -= _tabsize;
+                            *curPosition += _tabsize;
+                        }
+                        else
+                        {
+                            *curPosition += *strOffset;
+                            *strOffset = 0;
+                        }
                     }
                 }
 
                 break;
 
             case DEL:
-                for(i = 0; str[*strOffset + *curPosition + i]; i++)
-                {
-                    str[*strOffset + *curPosition + i] = str[*strOffset + *curPosition + 1 + i];
-                }
+                if(!ReadOnly)
+                    for(i = 0; str[*strOffset + *curPosition + i]; i++)
+                    {
+                        str[*strOffset + *curPosition + i] = str[*strOffset + *curPosition + 1 + i];
+                    }
 
                 break;
 
@@ -215,37 +219,57 @@ int Console::stredit(char* str, int row, int col, int fieldLength,
                 break;
 
             case TAB:
-                if(InTextEditor)
+                if(!ReadOnly)
                 {
-                    if(insertMode)
+                    if(InTextEditor)
                     {
-                        tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, true);
+                        if(insertMode)
+                        {
+                            tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, true);
+                        }
+                        else
+                        {
+                            tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, false);
+                        }
                     }
                     else
                     {
-                        tabFunction(str, strLength, maxStrLength, *curPosition, *strOffset, _tabsize, fieldLength, false);
+                        done = true;
                     }
-                }
-                else
-                {
-                    done = true;
                 }
 
                 break;
 
             default:
-                if(key >= ' ' && key <= '~')
+                if(!ReadOnly)
                 {
-                    if(insertMode)
+                    if(key >= ' ' && key <= '~')
                     {
-                        if(strLength < maxStrLength)
+                        if(insertMode)
                         {
-                            for(i = strLength; i != *curPosition + *strOffset; i--)
+                            if(strLength < maxStrLength)
                             {
-                                str[i] = str[i - 1];
-                            }
+                                for(i = strLength; i != *curPosition + *strOffset; i--)
+                                {
+                                    str[i] = str[i - 1];
+                                }
 
-                            strLength++;
+                                strLength++;
+                                str[*strOffset + *curPosition] = key;
+
+                                if(*curPosition != fieldLength - 1)
+                                {
+                                    (*curPosition)++;
+                                }
+                                else if(*curPosition + *strOffset < strLength)
+                                {
+                                    (*strOffset)++;
+                                }
+                            }
+                        }
+                        else if(strLength < maxStrLength || *curPosition + *strOffset < strLength)
+                        {
+                            strLength < maxStrLength && strLength++;
                             str[*strOffset + *curPosition] = key;
 
                             if(*curPosition != fieldLength - 1)
@@ -258,32 +282,18 @@ int Console::stredit(char* str, int row, int col, int fieldLength,
                             }
                         }
                     }
-                    else if(strLength < maxStrLength || *curPosition + *strOffset < strLength)
-                    {
-                        strLength < maxStrLength && strLength++;
-                        str[*strOffset + *curPosition] = key;
 
-                        if(*curPosition != fieldLength - 1)
-                        {
-                            (*curPosition)++;
-                        }
-                        else if(*curPosition + *strOffset < strLength)
-                        {
-                            (*strOffset)++;
-                        }
-                    }
-                }
+                    str[strLength] = 0;
+                    break;
+                }   // if
+            }       // switch
+        }           // else
+    }               // while
 
-                str[strLength] = 0;
-                break;
-            }   // switch
-        }       // else
-    }           // while
-
-    if(ReadOnly)
+    /*if(ReadOnly)
     {
         bio::strcpy(str, strOriginal);
-    }
+    }*/
 
     delete[] strOriginal;
 
