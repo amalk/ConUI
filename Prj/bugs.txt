@@ -1,0 +1,3 @@
+ENTER key on last line does not increase _loffset
+
+LEFT or BACKSPACE key when the length of previous line is equal to frameWidth - 2 or frameWidth - 1 places the cursor on wrong character - something wrong in goRight() or the parameters passed to it

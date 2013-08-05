@@ -88,9 +88,13 @@
     <ClCompile Include="clineedit.cpp" />
     <ClCompile Include="cmenu.cpp" />
     <ClCompile Include="cmenuitem.cpp" />
-    <ClCompile Include="console.cpp" />
-    <ClCompile Include="ctext.cpp" />
-    <ClCompile Include="Test10Menu.cpp" />
+    <ClCompile Include="console.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ctext.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Test8Text.cpp" />
     <ClCompile Include="text.cpp" />
     <ClCompile Include="cveditline.cpp" />
   </ItemGroup>
@@ -111,6 +115,14 @@
     <ClInclude Include="text.h" />
     <ClInclude Include="cveditline.h" />
     <ClInclude Include="cuigh.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="vc\console.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="vc\ctext.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

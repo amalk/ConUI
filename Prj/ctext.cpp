@@ -1,5 +1,9 @@
 #include "ctext.h"
 
+void goUp(int&, int&);
+void goDown(int&, int&, int, int);
+void goRight(int&, int&, int, int);
+
 namespace cui
 {
 CText::CText(int Row, int Col, int Width, int Height, bool* Insertmode,
@@ -47,34 +51,43 @@ int CText::edit()
     int local_offset  = _offset;
     int local_lcurpos = _lcurpos;
     int local_loffset = _loffset;
-    int draw_offset   = -1;
-    int draw_loffset  = -1;
+    int currentLine;
+    int lineLen;
+    int numLines;
     int key = 0;
     int i = 0;
     bool done = false;
 
     while(!done)
     {
-        if(draw_offset != _offset || draw_loffset != _loffset)
-        {
-            draw();
-            draw_offset = _offset;
-            draw_loffset = _loffset;
-        }
-
-        key = console.stredit((char*)(_T[_lcurpos + _loffset]), absRow() + _lcurpos + 1, absCol() + 1, width() - 2,
-                              _T[_lcurpos + _loffset].size(), &_offset, &_curpos, true, _displayOnly, *_insertmode);
+        draw();
+        currentLine = _lcurpos + _loffset;
+        numLines = _T.textLines();
+        key = console.stredit((_T[currentLine]), absRow() + _lcurpos + 1, absCol() + 1, width() - 2,
+                              _T[currentLine].size(), &_offset, &_curpos, true, _displayOnly, *_insertmode);
 
         switch(key)
         {
         case UP:
-            if(_lcurpos > 0)
+            goUp(_lcurpos, _loffset);
+            break;
+
+        case RIGHT:
+            lineLen = _T[currentLine].strlen();
+
+            if(_curpos + _offset == lineLen && _T[currentLine] != _T[numLines - 1])
             {
-                _lcurpos--;
+                goDown(_lcurpos, _loffset, height(), numLines);
+                _curpos = _offset = 0;
             }
-            else if(_loffset > 0)
+
+            break;
+
+        case LEFT:
+            if(!_curpos && !_offset && (_lcurpos || _loffset))
             {
-                _loffset--;
+                goUp(_lcurpos, _loffset);
+                goRight(_curpos, _offset, _T[_lcurpos + _loffset].strlen(), width());
             }
 
             break;
@@ -82,25 +95,25 @@ int CText::edit()
         case ENTER:
             if(!_displayOnly)
             {
-                _T.insertAt(_loffset + _lcurpos);
-                bio::strncpy((char*)_T[_lcurpos + _loffset], (char*)_T[_lcurpos + _loffset + 1],
-                             _curpos + _offset);   //Current line is set to everything before the cursor before enter was pressed
-                _T[_lcurpos + _loffset + 1] = &_T[_lcurpos + _loffset + 1][_curpos + _offset];
-                _T[_lcurpos + _loffset][_curpos + _offset] = '\0';
+                _T.insertAndBreakAt(currentLine + 1, _curpos + _offset);
             }
 
             _curpos = _offset = 0;
 
-            // fallthrough
+            // fallthrough since ENTER always takes the cursor down if possible
 
         case DOWN:
-            if(_lcurpos < height() - 3)
+            goDown(_lcurpos, _loffset, height(), numLines);
+            break;
+
+        case BACKSPACE:
+            if(!_curpos && !_offset && (_lcurpos || _loffset) && !_displayOnly)
             {
-                _lcurpos++;
-            }
-            else if(_loffset + _lcurpos < _T.textLines() - 1)
-            {
-                _loffset++;
+                lineLen = _T[currentLine - 1].strlen();
+                _T[currentLine - 1] += _T[currentLine];
+                _T.remove(currentLine);
+                goUp(_lcurpos, _loffset);
+                goRight(_curpos, _offset, lineLen, width());
             }
 
             break;
@@ -113,7 +126,10 @@ int CText::edit()
             _loffset = local_loffset;
             break;
 
-        default:
+        case F(1):
+        case F(2):
+        case F(6):
+        case F(10):
             done = true;
             break;
         }
@@ -137,4 +153,36 @@ void CText::displayOnly(bool val)
     _displayOnly = val;
 }
 
+}
+
+
+void goUp(int& lcurpos, int& loffset)
+{
+    ((lcurpos > 0) && (lcurpos--)) || ((loffset > 0) && (loffset--));
+}
+
+
+void goDown(int& lcurpos, int& loffset, int height, int numLines)
+{
+    if(lcurpos < height - 3)
+    {
+        lcurpos++;
+    }
+    else if(loffset + lcurpos < numLines - 1)
+    {
+        loffset++;
+    }
+}
+
+void goRight(int& curpos, int& offset, int lineLen, int frameWidth)
+{
+    if(lineLen - offset < frameWidth)
+    {
+        curpos = lineLen - offset;
+    }
+    else
+    {
+        curpos = frameWidth - 3;
+        offset = lineLen - curpos;
+    }
 }
