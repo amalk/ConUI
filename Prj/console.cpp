@@ -111,6 +111,10 @@ int Console::stredit(char* str, int row, int col, int fieldLength,
                 {
                     (*strOffset)--;
                 }
+                else
+                {
+                    done = true;
+                }
 
                 break;
 
@@ -123,6 +127,10 @@ int Console::stredit(char* str, int row, int col, int fieldLength,
                 {
                     (*strOffset)++;
                 }
+                else
+                {
+                    done = true;
+                }
 
                 break;
 
@@ -131,12 +139,16 @@ int Console::stredit(char* str, int row, int col, int fieldLength,
                 break;
 
             case END:
-                if(*strOffset + fieldLength < strLength)
+                if(strLength - *strOffset < fieldLength)
                 {
-                    *strOffset = strLength - fieldLength + 1;
+                    *curPosition = strLength - *strOffset;
+                }
+                else
+                {
+                    *curPosition = fieldLength - 1;
+                    *strOffset = strLength - *curPosition;
                 }
 
-                *curPosition = strLength - *strOffset;
                 break;
 
             case ESCAPE:
@@ -151,7 +163,11 @@ int Console::stredit(char* str, int row, int col, int fieldLength,
                 break;
 
             case BACKSPACE:
-                if(!ReadOnly)
+                if(!(*curPosition) && !(*strOffset))
+                {
+                    done = true;
+                }
+                else if(!ReadOnly)
                 {
                     if((*curPosition >= 0 && *strOffset + *curPosition != 0) || (*curPosition == 1 && *strOffset == 0))
                     {
@@ -294,7 +310,6 @@ int Console::stredit(char* str, int row, int col, int fieldLength,
     {
         bio::strcpy(str, strOriginal);
     }*/
-
     delete[] strOriginal;
 
     if(terminate)
