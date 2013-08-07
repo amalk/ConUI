@@ -57,9 +57,6 @@
     <ClCompile Include="ctext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test8Text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -119,13 +116,5 @@
     <ClInclude Include="cmenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="vc\console.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
-    <Object Include="vc\ctext.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
   </ItemGroup>
 </Project>
