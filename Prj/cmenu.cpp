@@ -76,7 +76,7 @@ void CMenu::draw(int fn)
         _Title.draw();
     }
 
-    if(_dropped || !_dropdown)
+    if((_dropped || !_dropdown) && (_cnt > 0))
     {
         CField::draw(fn);
         int fieldHeight = (_cnt < height() - 2) ? _cnt : height() - 2;
@@ -242,7 +242,7 @@ int CMenu::edit()
 
 void CMenu::set(const void* data)
 {
-    _selectedIndex = *(int*)data;
+    selectedIndex(*(int*)data);
 }
 
 int CMenu::selectedIndex()
@@ -252,6 +252,17 @@ int CMenu::selectedIndex()
 
 int CMenu::selectedIndex(int index)
 {
+    unsigned int i;
+    MNode* temp = _first;
+
+    for(i = 0; i < _cnt; i++, temp=temp->_next)
+        temp->_item->selected(false);
+
+    for(temp = _first; temp->_index < index; temp = temp->_next)
+        ;
+
+    temp->_item->selected(true);
+
     return _selectedIndex = index;
 }
 
