@@ -77,7 +77,6 @@ int CDialog::edit(int fn)
     else
     {
         bool done = false;
-        bool foundEditable;
 
         if(fn <= 0)
         {
@@ -89,13 +88,12 @@ int CDialog::edit(int fn)
             _curidx = fn - 1;
         }
 
-        for(foundEditable = false; !foundEditable; _curidx++)
+        // find an editable field
+        while(!_fld[_curidx]->editable())
         {
             (_curidx >= _fnum) && (_curidx = 0);
-            (_fld[_curidx]->editable()) && (foundEditable = true);
+            _curidx++;
         }
-
-        _curidx--;
 
         while(!done)
         {
@@ -108,25 +106,23 @@ int CDialog::edit(int fn)
                 break;
 
             case UP:
-                for(--_curidx, foundEditable = false; !foundEditable; _curidx--)
+                do
                 {
+                    _curidx--;
                     (_curidx < 0) && (_curidx = _fnum - 1);
-                    (_fld[_curidx]->editable()) && (foundEditable = true);
-                }
+                } while(!_fld[_curidx]->editable());
 
-                _curidx++;
                 break;
             
             case ENTER:
             case DOWN:
             case TAB:
-                for(++_curidx, foundEditable = false; !foundEditable; _curidx++)
+                do
                 {
+                    _curidx++;
                     (_curidx >= _fnum) && (_curidx = 0);
-                    (_fld[_curidx]->editable()) && (foundEditable = true);
-                }
+                } while(!_fld[_curidx]->editable());
 
-                _curidx--;
                 break;
 
             default:
