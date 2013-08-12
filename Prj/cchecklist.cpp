@@ -161,14 +161,15 @@ int CCheckList::edit()
 void* CCheckList::data()
 {
     unsigned int i;
+    unsigned int temp = 0;
 
-    for(i = 0; i < _cnt; i++)
-        if(_checkmarks[i]->checked())
+    for(i = _cnt; i > 0; i--)
+        if(_checkmarks[i - 1]->checked())
         {
-            _flags += 1 << i;    // pow(2, i)
+            temp += (1 << (i - 1));    // pow(2, i)
         }
 
-    return (void*)_flags;
+    return (void*)temp;
 }
 
 // Sets the checked state of the checkmarks in the list
@@ -176,13 +177,13 @@ void CCheckList::set(const void* data)
 {
     _flags = *(unsigned int*)data;
     unsigned int i = _flags;
-    unsigned int j = _cnt - 1;
+    unsigned int j = _cnt;
     unsigned int k;
 
-    for(k = 0; j >= 0; j--)
+    for(k = 0; j >= 1; j--)
     {
-        k = i >> j;                         // start extracting from the leftmost bit and continue right
-        _checkmarks[j]->checked(k & 1);     // only the rightmost bit is significant
+        k = i >> (j - 1);                       // start extracting from the leftmost bit and continue right
+        _checkmarks[j - 1]->checked(k & 1);     // only the rightmost bit is significant
     }
 }
 
