@@ -42,9 +42,11 @@ void CLineEdit::draw(int Refresh)
 
 int CLineEdit::edit()
 {
-    return console.stredit((char*)_data, absRow() + ((visible()) ? 1 : 0),
+    int i;
+    while((i = console.stredit((char*)_data, absRow() + ((visible()) ? 1 : 0),
                            absCol() + ((visible()) ? 1 : 0), width() - ((visible()) ? 2 : 0), _maxdatalen, &_offset, &_curpos,
-                           false, false, *_insertmode);
+                           false, false, *_insertmode)) == BACKSPACE);
+    return i;
 }
 
 bool CLineEdit::editable()const
