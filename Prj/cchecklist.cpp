@@ -161,15 +161,14 @@ int CCheckList::edit()
 void* CCheckList::data()
 {
     unsigned int i;
-    unsigned int temp = 0;
 
     for(i = _cnt; i > 0; i--)
         if(_checkmarks[i - 1]->checked())
         {
-            temp += (1 << (i - 1));    // pow(2, i)
+            _flags += (1 << (i - 1));    // pow(2, i)
         }
 
-    return (void*)temp;
+    return (void*)_flags;
 }
 
 // Sets the checked state of the checkmarks in the list

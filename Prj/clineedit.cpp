@@ -5,8 +5,8 @@ namespace cui
 
 // Constructor accepting six mandatory and two optional parameters
 CLineEdit::CLineEdit(char* Str, int Row, int Col, int Width,
-                     int Maxdatalen, bool* Insertmode, bool Bordered, const char* Border) 
-                     : CField(Row, Col,  Width, (Bordered) ? 3 : 1, Str, Bordered, Border)
+                     int Maxdatalen, bool* Insertmode, bool Bordered, const char* Border)
+    : CField(Row, Col,  Width, (Bordered) ? 3 : 1, Str, Bordered, Border)
 {
     _dyn = false;
     _data = Str;
@@ -18,9 +18,10 @@ CLineEdit::CLineEdit(char* Str, int Row, int Col, int Width,
 // Constructor accepting five mandatory and two optional parameters
 CLineEdit::CLineEdit(int Row, int Col, int Width, int Maxdatalen,
                      bool* Insertmode, bool Bordered, const char* Border)
-                     : CField(Row, Col,  Width, (Bordered) ? 3 : 1, 0, Bordered, Border)
+    : CField(Row, Col,  Width, (Bordered) ? 3 : 1, 0, Bordered, Border)
 {
-    _data = new char[Maxdatalen + 1]();    // allocate and initialize memory to accomodate editing of Maxdatalen characters
+    // allocate and initialize memory to accomodate editing of Maxdatalen characters
+    _data = new char[Maxdatalen + 1]();
     _dyn = true;
     _maxdatalen = Maxdatalen;
     _insertmode = Insertmode;
@@ -32,7 +33,7 @@ CLineEdit::~CLineEdit()
 {
     if(_dyn && _data)
     {
-        delete []_data;
+        delete[] _data;
     }
 }
 
@@ -48,9 +49,12 @@ void CLineEdit::draw(int Refresh)
 int CLineEdit::edit()
 {
     int i;
+
+    // loop to prevent exiting the function if BACKSPACE is pressed at curpos 0
     while((i = console.stredit((char*)_data, absRow() + ((visible()) ? 1 : 0),
-                   absCol() + ((visible()) ? 1 : 0), width() - ((visible()) ? 2 : 0), _maxdatalen, &_offset, &_curpos,
-                   false, false, *_insertmode)) == BACKSPACE);    // loop to prevent exiting the function if BACKSPACE is pressed at curpos 0
+                               absCol() + ((visible()) ? 1 : 0), width() - ((visible()) ? 2 : 0), _maxdatalen,
+                               &_offset, &_curpos, false, false, *_insertmode)) == BACKSPACE);
+
     return i;
 }
 
