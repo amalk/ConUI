@@ -110,10 +110,11 @@ int CDialog::edit(int fn)
                 {
                     _curidx--;
                     (_curidx < 0) && (_curidx = _fnum - 1);
-                } while(!_fld[_curidx]->editable());
+                }
+                while(!_fld[_curidx]->editable());
 
                 break;
-            
+
             case ENTER:
             case DOWN:
             case TAB:
@@ -121,7 +122,8 @@ int CDialog::edit(int fn)
                 {
                     _curidx++;
                     (_curidx >= _fnum) && (_curidx = 0);
-                } while(!_fld[_curidx]->editable());
+                }
+                while(!_fld[_curidx]->editable());
 
                 break;
 
