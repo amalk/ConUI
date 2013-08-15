@@ -5,6 +5,7 @@
 
 namespace cui
 {
+
 class CMenuItem: public CField
 {
     bool  _selected;
@@ -20,7 +21,9 @@ public:
     bool selected()const;
     void selected(bool val);
     const char* Text()const;
+    void setLabel(const char* data);
 };
+
 }
 
 #endif

@@ -77,6 +77,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="app_v3.cpp" />
     <ClCompile Include="bconsole.cpp" />
     <ClCompile Include="cbutton.cpp" />
     <ClCompile Include="cchecklist.cpp" />
@@ -88,12 +89,8 @@
     <ClCompile Include="clineedit.cpp" />
     <ClCompile Include="cmenu.cpp" />
     <ClCompile Include="cmenuitem.cpp" />
-    <ClCompile Include="console.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="ctext.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="console.cpp" />
+    <ClCompile Include="ctext.cpp" />
     <ClCompile Include="text.cpp" />
     <ClCompile Include="cveditline.cpp" />
   </ItemGroup>
@@ -111,6 +108,7 @@
     <ClInclude Include="cmenuitem.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="ctext.h" />
+    <ClInclude Include="musicdb.h" />
     <ClInclude Include="text.h" />
     <ClInclude Include="cveditline.h" />
     <ClInclude Include="cuigh.h" />
