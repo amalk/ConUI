@@ -161,6 +161,7 @@ int CCheckList::edit()
 void* CCheckList::data()
 {
     unsigned int i;
+    _flags = 0;
 
     for(i = _cnt; i > 0; i--)
         if(_checkmarks[i - 1]->checked())

@@ -86,4 +86,10 @@ const char* CMenuItem::Text()const
     return (char*)_Label.data();
 }
 
+// Sets the _Label's data to the incoming parameter
+void CMenuItem::setLabel(const char* data)
+{
+    _Label.set((void*)data);
+}
+
 }

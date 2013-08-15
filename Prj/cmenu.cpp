@@ -49,7 +49,7 @@ CMenu& CMenu::add(const char* Text, bool selected)
 
     _tail = newNode;
     _cnt++;
-    selected&&  (_selectedIndex = newNode->_index);
+    selected && selectedIndex(newNode->_index);
     return *this;
 }
 
@@ -76,7 +76,7 @@ void CMenu::draw(int fn)
         _Title.draw();
     }
 
-    if((_dropped || !_dropdown) && (_cnt > 0))
+    if(_dropped || !_dropdown)
     {
         CField::draw(fn);
         int fieldHeight = (_cnt < height() - 2) ? _cnt : height() - 2;
@@ -148,14 +148,7 @@ int CMenu::edit()
                 break;
 
             case SPACE:
-                for(i = 0, temp = _head; i < _cnt; i++)
-                {
-                    temp->_item->selected(false);
-                    temp = temp->_next;
-                }
-
-                _cur->_item->selected(true);
-                _selectedIndex = _cur->_index;
+                selectedIndex(_cur->_index);
                 doneBrowsing = true;
                 draw();
                 break;
@@ -253,15 +246,20 @@ int CMenu::selectedIndex()
 int CMenu::selectedIndex(int index)
 {
     unsigned int i;
-    MNode* temp = _first;
+    MNode* temp = _head;
 
-    for(i = 0; i < _cnt; i++, temp=temp->_next)
+    for(i = 0; i < _cnt && temp; i++, temp = temp->_next)
+    {
         temp->_item->selected(false);
+    }
 
-    for(temp = _first; temp->_index < index; temp = temp->_next)
+    for(temp = _head; temp && temp->_index < index; temp = temp->_next)
         ;
 
-    temp->_item->selected(true);
+    if(temp)
+    {
+        temp->_item->selected(true);
+    }
 
     return _selectedIndex = index;
 }
@@ -322,6 +320,167 @@ bool CMenu::goPrev()
     }
 
     return rv;
+}
+
+void CMenu::editNode(int i, const char* data)
+{
+    if(0 <= i && i < _cnt)
+    {
+        MNode* tNode;
+
+        for(tNode = _head; tNode->_index < i; tNode = tNode->_next)
+            ;
+
+        tNode->_item->setLabel(data);
+    }
+}
+
+void CMenu::deleteNode(int i)
+{
+    if(0 <= i && i < _cnt)
+    {
+        MNode* toDel;
+        MNode* temp;
+
+        for(toDel = _head; toDel && toDel->_index < i; toDel = toDel->_next)
+            ;
+
+        if(_cnt > 1)
+        {
+            for(temp = toDel->_next; temp && temp->_index <= _tail->_index; temp = temp->_next)
+            {
+                temp->_index--;
+            }
+        }
+
+        if(toDel == _head)
+        {
+            _head = _head->_next;
+            _first = _head;
+            _cur = _head;
+        }
+        else
+        {
+            toDel->_prev->_next = toDel->_next;
+        }
+
+        if(toDel == _tail)
+        {
+            _tail = toDel->_prev;
+        }
+        else
+        {
+            toDel->_next->_prev = toDel->_prev;
+        }
+
+        delete toDel;
+        _cnt--;
+    }
+}
+
+void CMenu::navUp(bool allTheWay)
+{
+    if(allTheWay || _selectedIndex == -1)
+    {
+        _cur = _first = _head;
+    }
+    else
+    {
+        _cur = _head;
+
+        //iterate through the MNodes to find the selected menuitem
+        while(_cur->_index < _selectedIndex)
+        {
+            _cur = _cur->_next;
+        }
+
+        if(goPrev())
+        {
+            if(_cur->_index < _first->_index)
+            {
+                _first = _first->_prev;
+            }
+        }
+        else
+        {
+            _cur = _tail;
+            int z = _cnt - (height() - 2);
+
+            for(int i = 0; i < z; i++)
+            {
+                _first = _first->_next;
+            }
+        }
+    }
+
+    selectedIndex(_cur->_index);
+    draw(C_NO_FRAME);
+}
+
+void CMenu::navDown(bool allTheWay)
+{
+    if(allTheWay || _selectedIndex == -1)
+    {
+        _cur = _tail;
+        _first = _head;
+        int z = _cnt - height() + 2;
+
+        for(int i = 0; i < z; i++)
+        {
+            _first = _first->_next;
+        }
+    }
+    else
+    {
+        _cur = _head;
+
+        //iterate through the MNodes to find the selected menuitem
+        while(_cur->_index < _selectedIndex)
+        {
+            _cur = _cur->_next;
+        }
+
+        if(goNext())
+        {
+            if(_cur->_index - _first->_index == height() - 2)
+            {
+                _first = _first->_next;
+            }
+        }
+        else
+        {
+            _cur = _first = _head;
+        }
+    }
+
+    selectedIndex(_cur->_index);
+    draw(C_NO_FRAME);
+}
+
+bool CMenu::navTo(int position)
+{
+    bool temp = false;
+
+    if(position <= _cnt && position >= 1)
+    {
+        (_selectedIndex == -1) && (_selectedIndex = 0);
+
+        while(position - 1 > _selectedIndex)
+        {
+            navDown();
+        }
+
+        while(position - 1 < _selectedIndex)
+        {
+            navUp();
+        }
+
+        selectedIndex(_cur->_index);
+        draw(C_NO_FRAME);
+        temp = true;
+    }
+
+    return temp;
 }
 
 }

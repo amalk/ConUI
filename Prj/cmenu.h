@@ -52,6 +52,11 @@ public:
     const char* selectedText();
     bool editable() const;
     ~CMenu(void);
+    void editNode(int i, const char* data);
+    void deleteNode(int i);
+    void navUp(bool allTheWay = false);
+    void navDown(bool allTheWay = false);
+    bool navTo(int position = 0);
 };
 
 extern const bool Select;
