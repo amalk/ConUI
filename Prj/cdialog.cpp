@@ -183,14 +183,14 @@ int CDialog::add(CField& field, bool dynamic)
     return add(&field, dynamic);
 }
 
-// Call add with the fields address and return a pointer to this dialog
+// Call add with the fields address
 CDialog& CDialog::operator<<(CField* field)
 {
     add(field);
     return *this;
 }
 
-// Call add with the referenced field and return a pointer to this dialog
+// Call add with the referenced field
 CDialog& CDialog::operator<<(CField& field)
 {
     add(field);

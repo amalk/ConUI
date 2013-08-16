@@ -406,6 +406,7 @@ void CMenu::deleteNode(int i)
         // Make the tail the one before the current tail and make current point to it
         _tail = toDel->_prev;
         _cur = _tail;
+        _tail->_next = 0;
     }
     else
     {
