@@ -420,6 +420,11 @@ void CMenu::deleteNode(int i)
         // Make the MNodes before and after toDel point to eachother
         toDel->_prev->_next = _cur = toDel->_next;  // Make the current MNode the one after the one to be deleted
         toDel->_next->_prev = toDel->_prev;
+
+        if(_first != _head)
+        {
+            _first = _first->_prev;
+        }
     }
 
     delete toDel;
