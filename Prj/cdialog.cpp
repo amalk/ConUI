@@ -99,8 +99,8 @@ int CDialog::edit(int fn)
         // Find the first editable field starting from the current index
         while(!_fld[_curidx]->editable())
         {
+             _curidx++;
             (_curidx >= _fnum) && (_curidx = 0);
-            _curidx++;
         }
 
         while(!done)
