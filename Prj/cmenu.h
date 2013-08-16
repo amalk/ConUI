@@ -57,6 +57,7 @@ public:
     void navUp(bool allTheWay = false);
     void navDown(bool allTheWay = false);
     bool navTo(int position = 0);
+    void firstToEnd();
 };
 
 extern const bool Select;

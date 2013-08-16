@@ -469,6 +469,13 @@ public:
             songMenu.add(song.name);
         }
 
+        // If songMenu has 1 or more songs at initialization, select the first one and display it
+        if(songMenu.editable()){
+            ReadFromFile(0);
+            songMenu.navUp(true);
+            RefreshInfo();
+        }
+
         clearSong();
     }
 
@@ -588,6 +595,8 @@ public:
                         if(ShowEdit())
                         {
                             AddRecord();
+                            songMenu.firstToEnd();
+                            songMenu.draw(C_NO_FRAME);
                         }
 
                         break;
@@ -604,14 +613,11 @@ public:
                         break;
 
                     case 2: // delete
-                        if(Yes("Confirm deletion of the record."))
-                        {
-                            index = songMenu.selectedIndex();
+                        index = songMenu.selectedIndex();
 
-                            if(index != -1)
-                            {
-                                DeleteRecord(index);
-                            }
+                        if(index != -1 && Yes("Confirm deletion of the record."))
+                        {
+                            DeleteRecord(index);
                         }
 
                         break;

@@ -43,7 +43,7 @@ CMenu& CMenu::add(const char* Text, bool selected)
     // Will only occur once at the first addition of a menuitem to the menu
     if(_head == 0)
     {
-        _cur = _first = _head = newNode;    // The pointers to the current, first and last nodes are all to t
+        _cur = _first = _head = newNode;    // Point the current, first and head to the new node
     }
     else    // The previous tail's next is made to point to the new one
     {
@@ -380,9 +380,10 @@ void CMenu::deleteNode(int i)
     MNode* toDel;
     MNode* temp;
 
+    _cnt--;
+
     // Iterate through the MNodes until its index matches i
     for(toDel = _head; toDel && toDel->_index < i; toDel = toDel->_next);
-    // && temp->_index <= _tail->_index
 
     // Change the index of all the MNodes after the one to be deleted to be one less
     // Starting from the MNode after the one to be deleted
@@ -408,9 +409,9 @@ void CMenu::deleteNode(int i)
         _cur = _tail;
         _tail->_next = 0;
 
-        if(_cnt > height() - 2)
+        if(_cnt > (height() - 3))
         {
-            _first = _first->_prev;
+            firstToEnd();
         }
 
     }
@@ -422,7 +423,6 @@ void CMenu::deleteNode(int i)
     }
 
     delete toDel;
-    _cnt--;
 }
 
 // Move the current MNode to the previous MNode and select it
@@ -455,13 +455,7 @@ void CMenu::navUp(bool allTheWay)
         else
         {
             // If so, set the current MNode to the tail and change first accordingly
-            _cur = _tail;
-            int z = _cnt - (height() - 2);
-
-            for(int i = 0; i < z; i++)
-            {
-                _first = _first->_next;
-            }
+            firstToEnd();
         }
     }
 
@@ -475,14 +469,7 @@ void CMenu::navDown(bool allTheWay)
     // allTheWay is default false and if true will just point the current MNode to the tail and change first accordingly
     if(allTheWay || _selectedIndex == -1)
     {
-        _cur = _tail;
-        _first = _head;
-        int z = _cnt - height() + 2;
-
-        for(int i = 0; i < z; i++)
-        {
-            _first = _first->_next;
-        }
+        firstToEnd();
     }
     else
     {
@@ -535,11 +522,24 @@ bool CMenu::navTo(int position)
         }
 
         selectedIndex(_cur->_index);
-        draw(C_NO_FRAME);
         temp = true;
     }
 
     return temp;
+}
+
+// Sets _first to the end of the menu and _cur to _tail
+void CMenu::firstToEnd()
+{
+    _first = _head;
+    int z = _cnt - (height() - 2);
+
+    for(int i = 0; i < z; i++)
+    {
+        _first = _first->_next;
+    }
+
+    _cur = _tail;
 }
 
 }
