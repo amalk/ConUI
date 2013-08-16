@@ -407,6 +407,12 @@ void CMenu::deleteNode(int i)
         _tail = toDel->_prev;
         _cur = _tail;
         _tail->_next = 0;
+
+        if(_cnt > height() - 2)
+        {
+            _first = _first->_prev;
+        }
+
     }
     else
     {
