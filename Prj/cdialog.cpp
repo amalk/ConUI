@@ -3,6 +3,7 @@
 namespace cui
 {
 
+// Constructor accepting seven optional parameters
 CDialog::CDialog(CFrame* Container, int Row, int Col, int Width, int Height,
                  bool Bordered, const char* Border)
     : CFrame(Row, Col, Width, Height, Bordered, Border, Container)
@@ -22,6 +23,8 @@ CDialog::CDialog(CFrame* Container, int Row, int Col, int Width, int Height,
     }
 }
 
+// Destructor to deallocate all the fields in the object safely
+// and also deallocate the arrays pointing to them to avoid memory leak
 CDialog::~CDialog()
 {
     int i;
@@ -38,7 +41,7 @@ CDialog::~CDialog()
     delete [] _fld;
 }
 
-// Depending on fn, draws all fields in dialog or draws a specific dialog
+// Depending on fn, draws all fields in dialog or draws a specific field
 void CDialog::draw(int fn)
 {
     int i = 0;
@@ -66,7 +69,7 @@ void CDialog::draw(int fn)
     }
 }
 
-// Begins editing from the first field or from field fn
+// Begins editing from the first editable field on or after fn
 int CDialog::edit(int fn)
 {
     int key = 0;
@@ -81,7 +84,8 @@ int CDialog::edit(int fn)
     {
         bool done = false;
 
-        // Set the current index to either: 0 if fn is less than 1, otherwise set it to the field number - 1
+        // If no parameter is passed to the function, search for an editable field
+        // starting from the first, otherwise search from the field on or after fn
         if(fn < 1)
         {
             draw(fn);
@@ -174,7 +178,7 @@ int CDialog::add(CField* field, bool dynamic)
     _dyn[_fnum] = dynamic;
     (field->editable()) && (_editable = true);  // Set the dialogs _editable to true if the field is editable
     field->container(this); // Set the fields container
-    return _fnum++; // Return the fields index, then increment it
+    return _fnum++; // Return the fields index, then increment the number of fields
 }
 
 // Call add with a reference to the field entered
@@ -215,13 +219,13 @@ int CDialog::curIndex()const
     return _curidx;
 }
 
-// Returns a pointer to the field pointed to by index
+// Returns a reference to the field pointed to by index
 CField& CDialog::operator[](unsigned int index)
 {
     return *_fld[index];
 }
 
-// Returns a pointer to the field pointed to by _curidx
+// Returns a reference to the field pointed to by _curidx
 CField& CDialog::curField()
 {
     return *_fld[_curidx];
