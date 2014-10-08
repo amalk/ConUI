@@ -4,6 +4,7 @@
 *.suo
 *.opensdf
 Debug/
+vc/
 ipch/
 
 # Compiled Object files
