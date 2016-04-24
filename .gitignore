@@ -1,11 +1,11 @@
 # Visual Studio
 *.sdf
-*.sln
 *.user
 *.suo
 *.opensdf
 Debug/
 ipch/
+vc/
 
 # Compiled Object files
 *.slo

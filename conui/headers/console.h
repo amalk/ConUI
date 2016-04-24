@@ -28,18 +28,4 @@ void tabFunction(char* str, int& strLength, int maxStrLength, int& position, int
 extern Console console; // console object - external linkage
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif

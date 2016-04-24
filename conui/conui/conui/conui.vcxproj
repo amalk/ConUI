@@ -11,24 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6C8F4C7E-5FAB-49FC-87A4-0ADE7C49E692}</ProjectGuid>
-    <Keyword>Win32Proj</Keyword>
-    <RootNamespace>t1</RootNamespace>
-    <ProjectName>t1</ProjectName>
+    <ProjectGuid>{789E7443-2966-42E3-A79B-4A7D35EE1217}</ProjectGuid>
+    <RootNamespace>conui</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -40,78 +38,68 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\7\Documents\GitHub\ConUI\conui\headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\7\Documents\GitHub\ConUI\conui\headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="app_v3.cpp" />
-    <ClCompile Include="bconsole.cpp" />
-    <ClCompile Include="cbutton.cpp" />
-    <ClCompile Include="cchecklist.cpp" />
-    <ClCompile Include="ccheckmark.cpp" />
-    <ClCompile Include="cdialog.cpp" />
-    <ClCompile Include="cfield.cpp" />
-    <ClCompile Include="cframe.cpp" />
-    <ClCompile Include="clabel.cpp" />
-    <ClCompile Include="clineedit.cpp" />
-    <ClCompile Include="cmenu.cpp" />
-    <ClCompile Include="cmenuitem.cpp" />
-    <ClCompile Include="console.cpp" />
-    <ClCompile Include="ctext.cpp" />
-    <ClCompile Include="text.cpp" />
-    <ClCompile Include="cveditline.cpp" />
+    <ClCompile Include="..\..\bconsole.cpp" />
+    <ClCompile Include="..\..\cbutton.cpp" />
+    <ClCompile Include="..\..\cchecklist.cpp" />
+    <ClCompile Include="..\..\ccheckmark.cpp" />
+    <ClCompile Include="..\..\cdialog.cpp" />
+    <ClCompile Include="..\..\cfield.cpp" />
+    <ClCompile Include="..\..\cframe.cpp" />
+    <ClCompile Include="..\..\clabel.cpp" />
+    <ClCompile Include="..\..\clineedit.cpp" />
+    <ClCompile Include="..\..\cmenu.cpp" />
+    <ClCompile Include="..\..\cmenuitem.cpp" />
+    <ClCompile Include="..\..\console.cpp" />
+    <ClCompile Include="..\..\ctext.cpp" />
+    <ClCompile Include="..\..\cveditline.cpp" />
+    <ClCompile Include="..\..\examples\musicdb.cpp" />
+    <ClCompile Include="..\..\text.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bconsole.h" />
-    <ClInclude Include="cbutton.h" />
-    <ClInclude Include="cchecklist.h" />
-    <ClInclude Include="ccheckmark.h" />
-    <ClInclude Include="cdialog.h" />
-    <ClInclude Include="cfield.h" />
-    <ClInclude Include="cframe.h" />
-    <ClInclude Include="clabel.h" />
-    <ClInclude Include="clineedit.h" />
-    <ClInclude Include="cmenu.h" />
-    <ClInclude Include="cmenuitem.h" />
-    <ClInclude Include="console.h" />
-    <ClInclude Include="ctext.h" />
-    <ClInclude Include="musicdb.h" />
-    <ClInclude Include="text.h" />
-    <ClInclude Include="cveditline.h" />
-    <ClInclude Include="cuigh.h" />
+    <ClInclude Include="..\..\headers\bconsole.h" />
+    <ClInclude Include="..\..\headers\cbutton.h" />
+    <ClInclude Include="..\..\headers\cchecklist.h" />
+    <ClInclude Include="..\..\headers\ccheckmark.h" />
+    <ClInclude Include="..\..\headers\cdialog.h" />
+    <ClInclude Include="..\..\headers\cfield.h" />
+    <ClInclude Include="..\..\headers\cframe.h" />
+    <ClInclude Include="..\..\headers\clabel.h" />
+    <ClInclude Include="..\..\headers\clineedit.h" />
+    <ClInclude Include="..\..\headers\cmenu.h" />
+    <ClInclude Include="..\..\headers\cmenuitem.h" />
+    <ClInclude Include="..\..\headers\console.h" />
+    <ClInclude Include="..\..\headers\ctext.h" />
+    <ClInclude Include="..\..\headers\cuigh.h" />
+    <ClInclude Include="..\..\headers\cveditline.h" />
+    <ClInclude Include="..\..\headers\text.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,14 +1,16 @@
+// Generates data.bn used for testing the app
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>  // setw()
 
-struct Song{
-  char name[71];
-  char artist[71];
-  char album[71];
-  char releaseDate[11];
-  unsigned long genre;
-  unsigned long rating;    
+struct Song {
+    char name[71];
+    char artist[71];
+    char album[71];
+    char releaseDate[11];
+    unsigned long genre;
+    unsigned long rating;
 };
 
 std::ostream& operator<<(std::ostream& os, const Song& temp) {
@@ -17,9 +19,9 @@ std::ostream& operator<<(std::ostream& os, const Song& temp) {
               << std::setw(25) << temp.album       << ' '
                                << temp.releaseDate << ' '
                                << temp.genre       << ' '
-                               << temp.rating;        
+                               << temp.rating;
     return os;
-}      
+}
 
 int main() {
     std::string fileN = "data.bn";
